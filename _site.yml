@@ -1,0 +1,30 @@
+name: glaucoma-staging
+output_dir: docs
+navbar:
+  title: Glaucoma Staging
+  type: inverse
+  left:
+  - text: Description
+    href: index.html
+  - text: Correlation
+    href: correlation.html
+  - text: Principal components
+    href: principal-components.html
+  - text: Clusters
+    href: clusters.html
+  - text: Discriminat analysis
+    href: discriminant-analisys.html
+  right:
+  - icon: fa-home fa-lg
+    href: http://aprendeconalf.es/
+output:
+  html_document:
+    theme: cosmo
+    toc: yes
+    toc_float: yes
+    fig_width: 8
+    fig_height: 6
+    df_print: paged
+    lib_dir: site_libs
+    self_contained: no
+    

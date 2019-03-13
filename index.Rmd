@@ -1,0 +1,84 @@
+---
+title: "Glaucoma staging study"
+date: "`r Sys.Date()`"
+---
+
+```{r knitr-init, echo=F}
+library(knitr)
+## Global options
+options(digits = 4)
+opts_chunk$set(echo=F, cache=T, prompt=F, tidy=T, comment=NA, message=F, warning=F, dev="png", dev.args=list(type="cairo"), dpi=300)
+```
+
+```{r packages, results='hide'}
+.packages <- c("DT")
+.installed <- .packages %in% installed.packages()
+if (length(.packages[!.installed])>0) install.packages(.packages[!.installed])
+lapply(.packages, require, character.only=T)
+```
+
+# Authors
+
+- Alfonso Parra Blesa ([alfonsoparrablesa@gmail.com](mailto:alfonsoparrablesa@gmail.com))
+- Alfredo Sánchez Alberca ([asalber@ceu.es](mailto:asalber@ceu.es))
+- José J García-Medina ([josegarciam@yahoo.com](mailto:josegarciam@yahoo.com))
+
+# Objetives
+
+Develop a staging system for glaucoma and a predictive model to classify new patiens in the glaucoma stages using optical coherence tomography (OCT) data.
+
+# Type of study
+
+Analityc observational cross-sectional and comparative study.
+
+# Inclusion criteria
+
+Only left eyes were considered.
+
+# Sample size
+
+```{r data-loading}
+source("data-loading.R")
+```
+
+
+Total number of eyes: `r nrow(data)`
+```{r sample-size-groups}
+table.sizes <- table(data$Glaucoma)
+names(table.sizes) <- c("Healthy", "Glaucoma")
+print(table.sizes)
+```
+
+# Variables
+
+```{r}
+variables <- read.csv(file="data/variables.csv", encoding="UTF-8", header=T, sep=",")
+datatable(variables, rownames = F, escape=F, class = 'display', options = list(pageLength = 10, dom="ltip", language = list(url = 'http://cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')))
+variables.Num <- variables[variables$Type=="Num",]
+variables.Factors <- variables[variables$Type=="Factor",]
+```
+
+# Data preprocessing
+
+It is known that the thickness of the retinal nerve fiber layers depends on age and BMO area. To avoid this dependency a linear transformation provided by the OCT company was applied to every variable. This linear transformations was obtained fitting a linear regression model on a normative group of healthy eyes.
+
+$$z_i=(x_i-\bar x-b_{xe}(e_i-\bar e)-b_{xa}(a_i-\bar a))/s_x$$
+where:
+
+- $x_i$ is the value of variable $x$ on eye $i$.
+- $\bar x$ is the mean of $x$.
+- $s_x$ is the standard deviation of $x$.
+- $e_i$ is the age of individual $i$.
+- $\bar e$ is the mean of the age in the normative database of healthy eyes.
+- $b_{xe}$ is the slope of the regression line of variable $x$ on the age.
+- $a_i$ is the BMO area of eye $i$.
+- $\bar a$ is the mean of the BMO area in the normative database of healthy eyes.
+- $b_{xa}$ is the slope of the regression line of variable $x$ on the BMO area.
+- $z_i$ is the standardized value of variable $x$ on eye $i$.
+
+
+# Glosary
+
+- OAG: Glaucoma de ángulo abierto
+- OCT: Optical coherence tomography
+- BMO: Bruch Membrane Opening 

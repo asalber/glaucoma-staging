@@ -1,0 +1,59 @@
+---
+title: "Glaucoma staging study"
+date: "`r Sys.Date()`"
+---
+
+```{r knitr-init, echo=F}
+library(knitr)
+## Global options
+options(digits = 4)
+opts_chunk$set(echo=F, cache=T, prompt=F, tidy=T, comment=NA, message=F, warning=F, dev="png", dev.args=list(type="cairo"), dpi=300)
+```
+
+```{r data-loading, results='hide'}
+source("data-loading.R")
+```
+
+```{r packages, results='hide'}
+.packages <- c("FactoMineR", "factoextra")
+.installed <- .packages %in% installed.packages()
+if (length(.packages[!.installed])>0) install.packages(.packages[!.installed])
+lapply(.packages, require, character.only=T)
+```
+
+# Principal components analysis
+
+```{r principal-components}
+# Principal components healthy and glaucoma eyes
+result.pca <- PCA(data[, c(varRims)], scale.unit = F, graph=F)
+# eigenvalues <- get_eigenvalue(result.pca)
+fviz_eig(result.pca, main = "Explained variability by principal components", ylab = "% of total variability", xlab = "Principal components (dimensions)")
+fviz_cos2(result.pca, choice = "var", axes=1, title="Correlation of variables with the first principal component") + ylab("Coef. Determination r²")
+fviz_contrib(result.pca, choice="var", axes=1, top = 10) 
+```
+
+The principal components analysis shows that the first principal component explains almost 60% of the total variability, while the second one only 11%.
+
+The variables most correlated with the first principal component are the global sector and the TI sector of BMO and RNFL rims.
+
+```{r map-eyes-principal-components}
+# Add coordinates of principal components to data frame
+data.pca <- cbind(result.pca$ind$coord, data[, "Glaucoma", drop=F])
+# Plot eyes on the two first principal components
+fviz_pca_ind(result.pca, 
+             geom = c("point"), 
+             axes = c(1,2), 
+             habillage = data.pca$Glaucoma, 
+             ddEllipses = T, 
+             ellipse.type="t", 
+             title = "Map of healthy and glaucoma eyes\non the two first principal components") +
+  scale_shape_discrete(labels = c("Glaucoma", "Healthy")) + 
+  scale_color_discrete(labels= c("Glaucoma", "Healthy")) +
+  theme(legend.position="top") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+The map shows a clear separation, with a small overlapping area, between healthy and glaucoma eyes along the firs principal component, while there is no separation at all along the second one.
+
+
+
