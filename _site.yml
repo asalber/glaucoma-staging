@@ -13,7 +13,7 @@ navbar:
   - text: Clusters
     href: clusters.html
   - text: Discriminant analysis
-    href: discriminant-analisys.html
+    href: linear-discriminant-analysis.html
   right:
   - icon: fa-home fa-lg
     href: http://aprendeconalf.es/

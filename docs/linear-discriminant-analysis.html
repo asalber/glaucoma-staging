@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<meta name="date" content="2019-03-14" />
+
+<title>Glaucoma staging study</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Glaucoma Staging</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Description</a>
+</li>
+<li>
+  <a href="correlation.html">Correlation</a>
+</li>
+<li>
+  <a href="principal-components.html">Principal components</a>
+</li>
+<li>
+  <a href="clusters.html">Clusters</a>
+</li>
+<li>
+  <a href="linear-discriminant-analysis.html">Discriminant analysis</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="http://aprendeconalf.es/">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Glaucoma staging study</h1>
+<h4 class="date"><em>2019-03-14</em></h4>
+
+</div>
+
+
+<div id="linear-discriminant-analysis" class="section level1">
+<h1>Linear discriminant analysis</h1>
+<div id="comparison-of-models" class="section level2">
+<h2>Comparison of models</h2>
+<table style="width:99%;">
+<colgroup>
+<col width="44%" />
+<col width="15%" />
+<col width="38%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Variables used in the model</th>
+<th align="right">Accuracy</th>
+<th align="right">Accuracy with healthy eyes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">All the variables</td>
+<td align="right">0.9646</td>
+<td align="right">0.89</td>
+</tr>
+<tr class="even">
+<td align="left">Sectors G and TI of all the rims</td>
+<td align="right">0.9513</td>
+<td align="right">0.8809</td>
+</tr>
+<tr class="odd">
+<td align="left">Sectors G of all the rims</td>
+<td align="right">0.885</td>
+<td align="right">0.8789</td>
+</tr>
+<tr class="even">
+<td align="left">Sectors TI of all the rims</td>
+<td align="right">0.708</td>
+<td align="right">0.8375</td>
+</tr>
+<tr class="odd">
+<td align="left">Sectors G and TI of rims BMO and 3.5</td>
+<td align="right">0.9204</td>
+<td align="right">0.8829</td>
+</tr>
+<tr class="even">
+<td align="left">Sectors G and TI of BMO rim</td>
+<td align="right">0.5929</td>
+<td align="right">0.8375</td>
+</tr>
+<tr class="odd">
+<td align="left">Sectors G and TI of 3.5 rim</td>
+<td align="right">0.8894</td>
+<td align="right">0.8648</td>
+</tr>
+<tr class="even">
+<td align="left">Sector G of rims BMO and 3.5</td>
+<td align="right">0.8894</td>
+<td align="right">0.8799</td>
+</tr>
+<tr class="odd">
+<td align="left">Sector TI of rims BMO and 3.5</td>
+<td align="right">0.6991</td>
+<td align="right">0.8385</td>
+</tr>
+<tr class="even">
+<td align="left">Sector G of rim BMO</td>
+<td align="right">0.5664</td>
+<td align="right">0.8285</td>
+</tr>
+<tr class="odd">
+<td align="left">Sector G of rim 3.5</td>
+<td align="right">0.8717</td>
+<td align="right">0.8557</td>
+</tr>
+<tr class="even">
+<td align="left">Sector TI of rim BMO</td>
+<td align="right">0.5973</td>
+<td align="right">0.8214</td>
+</tr>
+<tr class="odd">
+<td align="left">Sector TI of rim 3.5</td>
+<td align="right">0.6416</td>
+<td align="right">0.8224</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="model-using-all-the-variables" class="section level2">
+<h2>Model using all the variables</h2>
+<div id="confusion-matrix-without-healthy-eyes" class="section level3">
+<h3>Confusion matrix without healthy eyes</h3>
+<table style="width:64%;">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="6%" />
+<col width="6%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Healthy</th>
+<th align="center">I</th>
+<th align="center">II</th>
+<th align="center">III</th>
+<th align="center">IV</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Healthy</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>I</strong></td>
+<td align="center">0</td>
+<td align="center">47</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>II</strong></td>
+<td align="center">0</td>
+<td align="center">4</td>
+<td align="center">77</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>III</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">55</td>
+<td align="center">2</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>IV</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">39</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="performance-without-healthy-eyes" class="section level3">
+<h3>Performance without healthy eyes</h3>
+<table>
+<caption>Table continues below</caption>
+<colgroup>
+<col width="21%" />
+<col width="19%" />
+<col width="21%" />
+<col width="11%" />
+<col width="11%" />
+<col width="14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Sensibilidad</th>
+<th align="center">Especificidad</th>
+<th align="center">VPP</th>
+<th align="center">VPN</th>
+<th align="center">Precisión</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Stage I</strong></td>
+<td align="center">0.9216</td>
+<td align="center">0.9943</td>
+<td align="center">0.9792</td>
+<td align="center">0.9775</td>
+<td align="center">0.9792</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage II</strong></td>
+<td align="center">0.9872</td>
+<td align="center">0.973</td>
+<td align="center">0.9506</td>
+<td align="center">0.9931</td>
+<td align="center">0.9506</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Stage III</strong></td>
+<td align="center">0.9821</td>
+<td align="center">0.9882</td>
+<td align="center">0.9649</td>
+<td align="center">0.9941</td>
+<td align="center">0.9649</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage IV</strong></td>
+<td align="center">0.9512</td>
+<td align="center">0.9946</td>
+<td align="center">0.975</td>
+<td align="center">0.9892</td>
+<td align="center">0.975</td>
+</tr>
+</tbody>
+</table>
+<table style="width:100%;">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="21%" />
+<col width="21%" />
+<col width="15%" />
+<col width="19%" />
+<col width="21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Exhaustividad</th>
+<th align="center">Medida.F</th>
+<th align="center">Prevalencia</th>
+<th align="center">Detection.Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Stage I</strong></td>
+<td align="center">0.9216</td>
+<td align="center">0.9495</td>
+<td align="center">0.2257</td>
+<td align="center">0.208</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage II</strong></td>
+<td align="center">0.9872</td>
+<td align="center">0.9686</td>
+<td align="center">0.3451</td>
+<td align="center">0.3407</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Stage III</strong></td>
+<td align="center">0.9821</td>
+<td align="center">0.9735</td>
+<td align="center">0.2478</td>
+<td align="center">0.2434</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage IV</strong></td>
+<td align="center">0.9512</td>
+<td align="center">0.963</td>
+<td align="center">0.1814</td>
+<td align="center">0.1726</td>
+</tr>
+</tbody>
+</table>
+<table style="width:79%;">
+<colgroup>
+<col width="22%" />
+<col width="31%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Detection.Prevalence</th>
+<th align="center">Precisión.Global</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Stage I</strong></td>
+<td align="center">0.2124</td>
+<td align="center">0.9579</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage II</strong></td>
+<td align="center">0.3584</td>
+<td align="center">0.9801</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Stage III</strong></td>
+<td align="center">0.2522</td>
+<td align="center">0.9852</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage IV</strong></td>
+<td align="center">0.177</td>
+<td align="center">0.9729</td>
+</tr>
+</tbody>
+</table>
+<table style="width:64%;">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="6%" />
+<col width="6%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Healthy</th>
+<th align="center">I</th>
+<th align="center">II</th>
+<th align="center">III</th>
+<th align="center">IV</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Healthy</strong></td>
+<td align="center">756</td>
+<td align="center">51</td>
+<td align="center">40</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>I</strong></td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>II</strong></td>
+<td align="center">7</td>
+<td align="center">0</td>
+<td align="center">38</td>
+<td align="center">5</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>III</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">50</td>
+<td align="center">3</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>IV</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">38</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="performance-with-healthy-eyes" class="section level3">
+<h3>Performance with healthy eyes</h3>
+<table style="width:89%;">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="27%" />
+<col width="19%" />
+<col width="19%" />
+<col width="22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Sensitivity</th>
+<th align="center">Specificity</th>
+<th align="center">Pos Pred Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Stage Healthy</strong></td>
+<td align="center">0.9882</td>
+<td align="center">0.5973</td>
+<td align="center">0.8926</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage I</strong></td>
+<td align="center">0</td>
+<td align="center">0.9979</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Stage II</strong></td>
+<td align="center">0.4872</td>
+<td align="center">0.9869</td>
+<td align="center">0.76</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage III</strong></td>
+<td align="center">0.8929</td>
+<td align="center">0.9968</td>
+<td align="center">0.9434</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Stage IV</strong></td>
+<td align="center">0.9268</td>
+<td align="center">0.9989</td>
+<td align="center">0.9744</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Table continues below</caption>
+<colgroup>
+<col width="25%" />
+<col width="21%" />
+<col width="15%" />
+<col width="11%" />
+<col width="11%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Neg Pred Value</th>
+<th align="center">Precision</th>
+<th align="center">Recall</th>
+<th align="center">F1</th>
+<th align="center">Prevalence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Stage Healthy</strong></td>
+<td align="center">0.9375</td>
+<td align="center">0.8926</td>
+<td align="center">0.9882</td>
+<td align="center">0.938</td>
+<td align="center">0.7719</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage I</strong></td>
+<td align="center">0.9484</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">NA</td>
+<td align="center">0.05146</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Stage II</strong></td>
+<td align="center">0.9575</td>
+<td align="center">0.76</td>
+<td align="center">0.4872</td>
+<td align="center">0.5938</td>
+<td align="center">0.07871</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage III</strong></td>
+<td align="center">0.9936</td>
+<td align="center">0.9434</td>
+<td align="center">0.8929</td>
+<td align="center">0.9174</td>
+<td align="center">0.05651</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Stage IV</strong></td>
+<td align="center">0.9968</td>
+<td align="center">0.9744</td>
+<td align="center">0.9268</td>
+<td align="center">0.95</td>
+<td align="center">0.04137</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="21%" />
+<col width="29%" />
+<col width="24%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Detection Rate</th>
+<th align="center">Detection Prevalence</th>
+<th align="center">Balanced Accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Stage Healthy</strong></td>
+<td align="center">0.7629</td>
+<td align="center">0.8547</td>
+<td align="center">0.7928</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage I</strong></td>
+<td align="center">0</td>
+<td align="center">0.002018</td>
+<td align="center">0.4989</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Stage II</strong></td>
+<td align="center">0.03835</td>
+<td align="center">0.05045</td>
+<td align="center">0.737</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage III</strong></td>
+<td align="center">0.05045</td>
+<td align="center">0.05348</td>
+<td align="center">0.9448</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Stage IV</strong></td>
+<td align="center">0.03835</td>
+<td align="center">0.03935</td>
+<td align="center">0.9629</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="model-using-sectors-g-and-ti" class="section level2">
+<h2>Model using sectors G and TI</h2>
+<div id="confusion-matrix-without-healthy-eyes-1" class="section level3">
+<h3>Confusion matrix without healthy eyes</h3>
+<table style="width:64%;">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="6%" />
+<col width="6%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Healthy</th>
+<th align="center">I</th>
+<th align="center">II</th>
+<th align="center">III</th>
+<th align="center">IV</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Healthy</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>I</strong></td>
+<td align="center">0</td>
+<td align="center">48</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>II</strong></td>
+<td align="center">0</td>
+<td align="center">3</td>
+<td align="center">76</td>
+<td align="center">2</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>III</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">2</td>
+<td align="center">54</td>
+<td align="center">4</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>IV</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">37</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="performance-without-healthy-eyes-1" class="section level3">
+<h3>Performance without healthy eyes</h3>
+<table>
+<caption>Table continues below</caption>
+<colgroup>
+<col width="21%" />
+<col width="19%" />
+<col width="21%" />
+<col width="11%" />
+<col width="11%" />
+<col width="14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Sensibilidad</th>
+<th align="center">Especificidad</th>
+<th align="center">VPP</th>
+<th align="center">VPN</th>
+<th align="center">Precisión</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Stage I</strong></td>
+<td align="center">0.9412</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0.9831</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage II</strong></td>
+<td align="center">0.9744</td>
+<td align="center">0.9662</td>
+<td align="center">0.9383</td>
+<td align="center">0.9862</td>
+<td align="center">0.9383</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Stage III</strong></td>
+<td align="center">0.9643</td>
+<td align="center">0.9647</td>
+<td align="center">0.9</td>
+<td align="center">0.988</td>
+<td align="center">0.9</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage IV</strong></td>
+<td align="center">0.9024</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0.9788</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<table style="width:100%;">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="21%" />
+<col width="21%" />
+<col width="15%" />
+<col width="19%" />
+<col width="21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Exhaustividad</th>
+<th align="center">Medida.F</th>
+<th align="center">Prevalencia</th>
+<th align="center">Detection.Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Stage I</strong></td>
+<td align="center">0.9412</td>
+<td align="center">0.9697</td>
+<td align="center">0.2257</td>
+<td align="center">0.2124</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage II</strong></td>
+<td align="center">0.9744</td>
+<td align="center">0.956</td>
+<td align="center">0.3451</td>
+<td align="center">0.3363</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Stage III</strong></td>
+<td align="center">0.9643</td>
+<td align="center">0.931</td>
+<td align="center">0.2478</td>
+<td align="center">0.2389</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage IV</strong></td>
+<td align="center">0.9024</td>
+<td align="center">0.9487</td>
+<td align="center">0.1814</td>
+<td align="center">0.1637</td>
+</tr>
+</tbody>
+</table>
+<table style="width:79%;">
+<colgroup>
+<col width="22%" />
+<col width="31%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Detection.Prevalence</th>
+<th align="center">Precisión.Global</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Stage I</strong></td>
+<td align="center">0.2124</td>
+<td align="center">0.9706</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage II</strong></td>
+<td align="center">0.3584</td>
+<td align="center">0.9703</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Stage III</strong></td>
+<td align="center">0.2655</td>
+<td align="center">0.9645</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage IV</strong></td>
+<td align="center">0.1637</td>
+<td align="center">0.9512</td>
+</tr>
+</tbody>
+</table>
+<table style="width:64%;">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="6%" />
+<col width="6%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Healthy</th>
+<th align="center">I</th>
+<th align="center">II</th>
+<th align="center">III</th>
+<th align="center">IV</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Healthy</strong></td>
+<td align="center">756</td>
+<td align="center">50</td>
+<td align="center">43</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>I</strong></td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>II</strong></td>
+<td align="center">6</td>
+<td align="center">0</td>
+<td align="center">33</td>
+<td align="center">6</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>III</strong></td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">2</td>
+<td align="center">48</td>
+<td align="center">6</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>IV</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">35</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="performance-with-healthy-eyes-1" class="section level3">
+<h3>Performance with healthy eyes</h3>
+<table style="width:89%;">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="27%" />
+<col width="19%" />
+<col width="19%" />
+<col width="22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Sensitivity</th>
+<th align="center">Specificity</th>
+<th align="center">Pos Pred Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Stage Healthy</strong></td>
+<td align="center">0.9882</td>
+<td align="center">0.5841</td>
+<td align="center">0.8894</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage I</strong></td>
+<td align="center">0.01961</td>
+<td align="center">0.9979</td>
+<td align="center">0.3333</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Stage II</strong></td>
+<td align="center">0.4231</td>
+<td align="center">0.9869</td>
+<td align="center">0.7333</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage III</strong></td>
+<td align="center">0.8571</td>
+<td align="center">0.9904</td>
+<td align="center">0.8421</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Stage IV</strong></td>
+<td align="center">0.8537</td>
+<td align="center">0.9989</td>
+<td align="center">0.9722</td>
+</tr>
+</tbody>
+</table>
+<table style="width:96%;">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="27%" />
+<col width="23%" />
+<col width="16%" />
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Neg Pred Value</th>
+<th align="center">Precision</th>
+<th align="center">Recall</th>
+<th align="center">F1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Stage Healthy</strong></td>
+<td align="center">0.9362</td>
+<td align="center">0.8894</td>
+<td align="center">0.9882</td>
+<td align="center">0.9362</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage I</strong></td>
+<td align="center">0.9494</td>
+<td align="center">0.3333</td>
+<td align="center">0.01961</td>
+<td align="center">0.03704</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Stage II</strong></td>
+<td align="center">0.9524</td>
+<td align="center">0.7333</td>
+<td align="center">0.4231</td>
+<td align="center">0.5366</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage III</strong></td>
+<td align="center">0.9914</td>
+<td align="center">0.8421</td>
+<td align="center">0.8571</td>
+<td align="center">0.8496</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Stage IV</strong></td>
+<td align="center">0.9937</td>
+<td align="center">0.9722</td>
+<td align="center">0.8537</td>
+<td align="center">0.9091</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Table continues below</caption>
+<colgroup>
+<col width="27%" />
+<col width="18%" />
+<col width="23%" />
+<col width="30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Prevalence</th>
+<th align="center">Detection Rate</th>
+<th align="center">Detection Prevalence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Stage Healthy</strong></td>
+<td align="center">0.7719</td>
+<td align="center">0.7629</td>
+<td align="center">0.8577</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage I</strong></td>
+<td align="center">0.05146</td>
+<td align="center">0.001009</td>
+<td align="center">0.003027</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Stage II</strong></td>
+<td align="center">0.07871</td>
+<td align="center">0.0333</td>
+<td align="center">0.04541</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage III</strong></td>
+<td align="center">0.05651</td>
+<td align="center">0.04844</td>
+<td align="center">0.05752</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Stage IV</strong></td>
+<td align="center">0.04137</td>
+<td align="center">0.03532</td>
+<td align="center">0.03633</td>
+</tr>
+</tbody>
+</table>
+<table style="width:56%;">
+<colgroup>
+<col width="27%" />
+<col width="27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Balanced Accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Stage Healthy</strong></td>
+<td align="center">0.7862</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage I</strong></td>
+<td align="center">0.5087</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Stage II</strong></td>
+<td align="center">0.705</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Stage III</strong></td>
+<td align="center">0.9238</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Stage IV</strong></td>
+<td align="center">0.9263</td>
+</tr>
+</tbody>
+</table>
+<p><img src="linear-discriminant-analysis_files/figure-html/confidence-intervals-means-clusters-1.png" width="2400" /></p>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
