@@ -12,7 +12,7 @@ navbar:
     href: principal-components.html
   - text: Clusters
     href: clusters.html
-  - text: Discriminat analysis
+  - text: Discriminant analysis
     href: discriminant-analisys.html
   right:
   - icon: fa-home fa-lg

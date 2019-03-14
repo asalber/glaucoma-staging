@@ -29,13 +29,14 @@ cormat <- round(cor(data[, varRims], use="complete.obs"),2)
 melted.cormat <- melt(cormat)
 melted.cormat$Var1 <- factor(melted.cormat$Var1, levels=varSectors)
 melted.cormat$Var2 <- factor(melted.cormat$Var2, levels=varSectors)
-print(ggplot(data = melted.cormat, aes(x=Var1, y=Var2, fill=value, label=value)) + 
-        geom_tile() +
-        geom_text(size=1) +
-        xlab('') + 
-        ylab('') + 
-        ggtitle("Correlation matrix among BMO and RFNL rims by sectors") + 
-        theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.5)))
+ggplot(data = melted.cormat, aes(x = Var1, y = Var2, fill = value, label = value)) +
+  geom_tile() +
+  geom_text(size = 2) +
+  xlab('') +
+  ylab('') +
+  ggtitle("Correlation matrix among BMO and RFNL rims by sectors") +
+  labs(fill = "Pearson\ncorrelation r") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5), plot.title = element_text(hjust = 0.5))
 ```
 
 The correlation analysis showed a clear correlation pattern by sectors. There was a very strong correlation (r>0.9) among the thickness of the BMO and RNFL rims 3.5, 4.1 and 4.7 by sectors. There was also a strong correlation (r>0.75) among the sectors of the BMO, except the BMO.G, that presented a very strong correlation with the others sectors. On the other hand, there was a very weak correlation (r<0.2) between the T sector and the N, NI and NS sectors. The T sector was in fact, the less correlated with the rest. 

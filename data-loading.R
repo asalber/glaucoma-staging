@@ -39,17 +39,9 @@ varRims <- c(varBMO, var3.5, var4.1, var4.7)
 varSectors <- c(varG, varTI, varT, varTS, varNS, varN, varNI)
 
 # Variables selection
-data %<>% dplyr::select(c("Eye", "Glaucoma", varRims))
+data %<>% dplyr::select(c("Id", "Eye", "Glaucoma", varRims))
 # Select complete cases
 data <- data[complete.cases(data), ]
-# Left eyes 
-data.L <- filter(data, Eye=="L")
-# Right eyes
-data.R <- filter(data, Eye=="R")
-# Healthy
-data.Sanos <- filter(data, Glaucoma=="N")
-# Sick
-data.Glaucoma <- filter(data, Glaucoma=="Y")
 
 # Filtrado de ojos izquierdos
 data %<>% filter(Eye=="L")
