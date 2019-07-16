@@ -14,6 +14,8 @@ navbar:
     href: clusters.html
   - text: Discriminant analysis
     href: linear-discriminant-analysis.html
+  - text: App
+    href: https://asalberapps.shinyapps.io/Glaucoma-Staging-System/
   right:
   - icon: fa-home fa-lg
     href: http://aprendeconalf.es/
