@@ -237,13 +237,15 @@ pander(classification$performance$byClass, split.cells = 1)
 ```
 
 
+### Main statistics for the distribution of BMO.G, BMO.TI, Rim3.5.G and Rim3.5.TI by stages
 ```{r confidence-intervals-means-clusters}
 # Means of variables by stages
 melted.data <- melt(data[, c("Stage", vars=c("BMO.G", "BMO.TI", "Rim3.5.G", "Rim3.5.TI"))])
 colnames(melted.data)[2] <- "Sector" 
-means <- melted.data %>% group_by(Stage, Sector) %>% 
+means <- melted.data %>% group_by(Sector, Stage) %>% 
   summarise(n = n(), mean = mean(value, na.rm = T), sd = sd(value, na.rm = T))  %>%
   mutate(se = sd/sqrt(n), lower.ci = mean-qt(1-(0.05/2), n-1)*se, upper.ci = mean+qt(1-(0.05/2), n-1)*se)
+pander(means)
 
 # Color palette
 colfunc <- colorRampPalette(c("#FD8D3C", "#800026"))

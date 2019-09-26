@@ -7,11 +7,11 @@ if (length(.packages[!.installed])>0) install.packages(.packages[!.installed])
 lapply(.packages, require, character.only=T)
 
 # Number of clusters
-fviz_nbclust(data.Glaucoma[, c(varBMO, var3.5)], kmeans, method = "wss") + 
+fviz_nbclust(data.glaucoma[, varRims], kmeans, method = "wss") + 
   xlab("Number of clusters") + 
   ylab("Intra-groups sum of squares") + 
   ggtitle("Reduction of intra-groups variability according to the number of clusters")
-ggsave("img/reduction-variability-number-clusters.pdf")
+#ggsave("img/reduction-variability-number-clusters.pdf")
 
 # K-means clusters
 seed = 123
@@ -24,10 +24,12 @@ labels <- c("I", "II", "III", "IV")
 colfunc <- colorRampPalette(c("#FD8D3C", "#800026"))
 palette <- colfunc(n)
 palette.healthy <- c("#00BFC4", palette)
+# Shapes
+shapes <- c(1, 3, 15, 17, 16)
 # k-means
-clusters <- kmeans(data[data$Glaucoma=="Y", vars], centers = n, nstart = 25)
+clusters <- kmeans(data.glaucoma[, vars], centers = n, nstart = 25)
 centers <- clusters$centers[order(clusters$centers[,1], decreasing = T),]
-clusters <- kmeans(data[data$Glaucoma=="Y", vars], centers = centers)
+clusters <- kmeans(data.glaucoma[, vars], centers = centers)
 # Convert the cluster into a factor
 clusters$cluster <- as.factor(clusters$cluster)
 # Assign labels to factors
@@ -60,9 +62,10 @@ fviz_pca_ind(
 ) +
   xlab("First principal component") +
   ylab("Second principal component") +
+  scale_shape_manual(values = shapes[-1]) +
   theme(legend.position = "top") +
   theme(plot.title = element_text(hjust = 0.5))
-ggsave("img/map-glaucoma-stages-whithout-healthy.pdf")
+# ggsave("img/map-glaucoma-stages-whithout-healthy.pdf")
 
 # Map of clusters (with healthy eyes)
 fviz_pca_ind(
@@ -78,6 +81,7 @@ fviz_pca_ind(
 ) +
   xlab("First principal component") +
   ylab("Second principal component") +
+  scale_shape_manual(values = shapes) +
   theme(legend.position = "top") +
   theme(plot.title = element_text(hjust = 0.5))
 ggsave("img/map-glaucoma-stages-whith-healthy.pdf")
@@ -104,4 +108,5 @@ ggplot(means, aes(x = Sector, y = mean, colour = Stage, shape = Stage)) +
   geom_pointrange(aes(ymin = lower.ci, ymax = upper.ci), position = position_dodge(width = 0.5)) +
   ggtitle("Confidence intervals for the means of BMO and RNF rims sectors by stages") +
   scale_colour_manual(values = palette.healthy) +
+  scale_shape_manual(values = shapes) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.5), plot.title = element_text(hjust = 0.5))

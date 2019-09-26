@@ -5,20 +5,40 @@ require(MASS)
 
 # Data loading
 data <- read.csv(file="data/data-preprocessed-clusters.csv", header=T, sep=",")
+# Recode Stages to "Glaucoma"
+data$Diagnose <- recode_factor(data$Stage, .default = "Glaucoma", Healthy = "Healthy")
+
+# CLASSIFICATION MODEL FOR UNDIAGNOSED PATIENTS
+# Compute principal components 
+pca <- prcomp(data[, c("BMO.G", "BMO.TI", "Rim3.5.G", "Rim3.5.TI")], center = F, scale = F)
+# Add principal components coordinates to a data frame  
+data.pca <- as.data.frame(pca$x)
+# Add cluster to principal components data frame
+data.pca$Diagnose <- data$Diagnose
+
+# Plot glaucoma clusters on the two first principal components
+clusters.plot <- ggplot(data.pca, aes(x = PC1, y = PC2, col=Diagnose)) + 
+    geom_point() +
+    ggtitle("Position of the eye on the two first principal components plane")
+
+# Linear discriminant analysis (without healthy eyes)
+lda <- lda(Diagnose~., data=data.pca)
+
+# CLASSIFICATION MODEL FOR GLAUCOMA PATIENTS
 # Filter eyes with glaucoma
 data.glaucoma <- data[data$Stage != "Healthy", ]
 # Remove empty levels
 data.glaucoma <- droplevels(data.glaucoma)
 
 # Compute principal components 
-result.pca <- prcomp(data.glaucoma[, c("BMO.G", "BMO.TI", "Rim3.5.G", "Rim3.5.TI")], center = F, scale = F)
+pca.glaucoma <- prcomp(data.glaucoma[, c("BMO.G", "BMO.TI", "Rim3.5.G", "Rim3.5.TI")], center = F, scale = F)
 # Add principal components coordinates to a data frame  
-data.glaucoma.pca <- as.data.frame(result.pca$x)
+data.glaucoma.pca <- as.data.frame(pca.glaucoma$x)
 # Add cluster to principal components data frame
 data.glaucoma.pca$Stage <- data.glaucoma$Stage
 
-# Plot clusters on the two first principal components
-clustersPlot <- ggplot(data.glaucoma.pca, aes(x = PC1, y = PC2, col=Stage)) + 
+# Plot glaucoma clusters on the two first principal components
+clusters.glaucoma.plot <- ggplot(data.glaucoma.pca, aes(x = PC1, y = PC2, col=Stage)) + 
     geom_point() +
     ggtitle("Position of the eye on the two first principal components plane")
 
@@ -35,6 +55,7 @@ ui <- fluidPage(
     sidebarLayout(
         # Sidebar panel for inputs
         sidebarPanel(
+            radioButtons("diagnosed", "Have you been diagnosed with glaucoma?", choices = c("Yes", "No"), inline = T),
             h3("Eye measures"),
             # Include clarifying text
             helpText("Enter the raw retinal measures."),
@@ -59,17 +80,17 @@ ui <- fluidPage(
         # Main panel for displaying outputs ----
         mainPanel(
             h3("Eye position on the Glaucoma clusters"),
-            plotOutput('clustersPlot'),
-            htmlOutput("prediction"),
-            tableOutput("probabilities")
+            plotOutput("clusters.plot"),
+            htmlOutput("clusters.prediction"),
+            tableOutput("clusters.probabilities")
         )
     ),
-    
     HTML("More information about this Glaucoma Staging Sytem on <a href='http://aprendeconalf.es/glaucoma-staging/'>http://aprendeconalf.es/glaucoma-staging/</a>")
 )
 
 # Define server logic to summarize and view selected dataset ----
 server <- function(input, output) {
+    
     # Create a reactive data frame with the new eye data
     newdata <- reactive({
         input$prediction
@@ -83,30 +104,48 @@ server <- function(input, output) {
             for (i in colnames(dataeye)[-1:-2]){
                 dataeye[[i]] <- (dataeye[[i]]-std.coef[i,"Average"]-std.coef[i,"Slope.age"]*(dataeye$Age-age.mean)-std.coef[i,"Slope.bmo.area"]*(dataeye$BMO.Area-bmo.area.mean))/std.coef[i,"Stdev"]
             }
-            as.data.frame(predict(result.pca, dataeye))
+            if (input$diagnosed == "Yes") {
+                as.data.frame(predict(pca.glaucoma, dataeye))
+            } else {
+                as.data.frame(predict(pca, dataeye))
+            }
         })
     })
+    
     # Plot the new eye on the principal components
-    output$clustersPlot <- renderPlot(
-        if (input$prediction) {
-            clustersPlot + geom_point(data = newdata(), col = 'red', size = 4)
+    output$clusters.plot <- renderPlot(
+        if (input$diagnosed == "Yes") {
+            if (input$prediction) {
+                clusters.glaucoma.plot + geom_point(data = newdata(), col = 'green', size = 4)
+            } else {
+                clusters.glaucoma.plot
+            }
         } else {
-            clustersPlot
+            if (input$prediction) {
+                clusters.plot + geom_point(data = newdata(), col = 'green', size = 4)
+            } else {
+                clusters.plot
+            }
         }
     )
+    # Compute the predictions
     prediction <- reactive({
-        predict(lda.glaucoma, newdata())
+        if (input$diagnosed == "Yes") {
+            predict(lda.glaucoma, newdata())
+        } else {
+            predict(lda, newdata())
+        }
     })
     # Render the prediction for the new eye
-    output$prediction <- renderUI(
+    output$clusters.prediction <- renderUI(
         if (input$prediction) {
-            HTML(paste(h3("Stage prediction:", prediction()$class), h4("Probabilities for glaucoma stages")))
+            HTML(paste(h3(span("Stage prediction:", prediction()$class, style = "color: red")), h4("Probabilities for glaucoma stages")))
         } else {
             return(NULL)
         }
     )
     # Render the probabilities of every glaucoma stage
-    output$probabilities <- renderTable(
+    output$clusters.probabilities <- renderTable(
         if (input$prediction) {
             prediction()$posterior
         } else {

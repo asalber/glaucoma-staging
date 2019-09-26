@@ -43,6 +43,8 @@ data %<>% dplyr::select(c("Id", "Eye", "Glaucoma", varRims))
 # Select complete cases
 data <- data[complete.cases(data), ]
 
-# Filtrado de ojos izquierdos
+# Filter left eyes
 data %<>% filter(Eye=="L")
+# Data frame of glaucoma eyes
+data.glaucoma <- data[data$Glaucoma == "Y", ]
 

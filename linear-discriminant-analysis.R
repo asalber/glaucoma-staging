@@ -140,7 +140,7 @@ saveRDS(lda.model, "app/lda-model.Rds")
 
 
 # Means of variables by stages
-melted.data <- melt(data[, c("Stage", vars=c(varG, varTI))])
+melted.data <- melt(data[, c("Stage", vars=c("BMO.G", "BMO.TI", "Rim3.5.G", "Rim3.5.TI"))])
 colnames(melted.data)[2] <- "Sector" 
 means <- melted.data %>% group_by(Stage, Sector) %>% 
   summarise(n = n(), mean = mean(value, na.rm = T), sd = sd(value, na.rm = T))  %>%
