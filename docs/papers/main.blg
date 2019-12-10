@@ -1,0 +1,64 @@
+This is BibTeX, Version 0.99d (TeX Live 2019)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: main.aux
+The style file: naturemag-doi.bst
+Database file #1: bibliography.bib
+I was expecting a `,' or a `}'---line 156 of file bibliography.bib
+ :  
+ :  edition = 2,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "society:2017:terminology"
+Warning--I didn't find a database entry for "thylefors:1994:bull"
+Warning--I didn't find a database entry for "krasnov:1965:pathogenic"
+Warning--I didn't find a database entry for "bengtssonb:2012:performance"
+Warning--I didn't find a database entry for "grewal:2013:diagnostico"
+Warning--I didn't find a database entry for "toteberg-harms:2012:repeatability"
+Warning--I didn't find a database entry for "balwuantray:2013:"
+Warning--I didn't find a database entry for "hassel:2009:"
+Warning--I didn't find a database entry for "hirasawa:2013:"
+Warning--I didn't find a database entry for "mansoori:2018:optical"
+`journal' is a missing field, not a string, for entry sanchez:2015:bringing
+while executing---line 1558 of file naturemag-doi.bst
+You've used 20 entries,
+            2380 wiz_defined-function locations,
+            1138 strings with 14332 characters,
+and the built_in function-call counts, 7890 in all, are:
+= -- 559
+> -- 200
+< -- 0
++ -- 100
+- -- 50
+* -- 1001
+:= -- 880
+add.period$ -- 59
+call.type$ -- 20
+change.case$ -- 19
+chr.to.int$ -- 0
+cite$ -- 20
+duplicate$ -- 678
+empty$ -- 726
+format.name$ -- 66
+if$ -- 1549
+int.to.chr$ -- 0
+int.to.str$ -- 20
+missing$ -- 164
+newline$ -- 109
+num.names$ -- 20
+pop$ -- 114
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 114
+stack$ -- 0
+substring$ -- 441
+swap$ -- 681
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 52
+width$ -- 22
+write$ -- 225
+(There were 2 error messages)

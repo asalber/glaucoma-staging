@@ -1,7 +1,7 @@
 library(shiny)
 # Load packages
 library(tidyverse)
-require(MASS)
+library(MASS)
 
 # Data loading
 data <- read.csv(file="data/data-preprocessed-clusters.csv", header=T, sep=",")

@@ -1,0 +1,184 @@
+\begin{thebibliography}{10}
+\urlstyle{rm}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname doiprefix\endcsname\relax\def\doiprefix{DOI: }\fi
+\providecommand{\bibinfo}[2]{#2}
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem{etiennerourgaud:1961:lexploration}
+\bibinfo{author}{{\'E}tienne, R.} \& \bibinfo{author}{Ourgaud, A.}
+\newblock \bibinfo{title}{L{\rq}exploration fonctionnelle de l{\rq}oeil
+  glaucomateux. rapport présenté à la société française d'ophtalmologie}
+  (\bibinfo{year}{1961}).
+
+\bibitem{huang:1991:optical}
+\bibinfo{author}{Huang, D.} \emph{et~al.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Optical coherence tomography}}.
+\newblock {\emph{\JournalTitle{Science}}} \textbf{\bibinfo{volume}{254}},
+  \bibinfo{pages}{1178–1181}, \doiprefix\url{10.1126/science.1957169}
+  (\bibinfo{year}{1991}).
+\newblock
+  \eprint{https://science.sciencemag.org/content/254/5035/1178.full.pdf}.
+
+\bibitem{quigley:1982:optic}
+\bibinfo{author}{Quigley, H.~A.}, \bibinfo{author}{Addicks, E.~M.} \&
+  \bibinfo{author}{Green, W.~R.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{{O}ptic nerve damage in human
+  glaucoma. {I}{I}{I}. {Q}uantitative correlation of nerve fiber loss and
+  visual field defect in glaucoma, ischemic neuropathy, papilledema, and toxic
+  neuropathy}}}.
+\newblock {\emph{\JournalTitle{Arch. Ophthalmol.}}}
+  \textbf{\bibinfo{volume}{100}}, \bibinfo{pages}{135--146}
+  (\bibinfo{year}{1982}).
+
+\bibitem{schuman:1995:quantification}
+\bibinfo{author}{Schuman, J.~S.} \emph{et~al.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{{Q}uantification of nerve fiber
+  layer thickness in normal and glaucomatous eyes using optical coherence
+  tomography}}}.
+\newblock {\emph{\JournalTitle{Arch. Ophthalmol.}}}
+  \textbf{\bibinfo{volume}{113}}, \bibinfo{pages}{586--596}
+  (\bibinfo{year}{1995}).
+
+\bibitem{lee:2010:reproducibility}
+\bibinfo{author}{Lee, S.~H.}, \bibinfo{author}{Kim, S.~H.},
+  \bibinfo{author}{Kim, T.~W.}, \bibinfo{author}{Park, K.~H.} \&
+  \bibinfo{author}{Kim, D.~M.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{{R}eproducibility of retinal nerve
+  fiber thickness measurements using the test-retest function of spectral
+  {O}{C}{T}/{S}{L}{O} in normal and glaucomatous eyes}}}.
+\newblock {\emph{\JournalTitle{J. Glaucoma}}} \textbf{\bibinfo{volume}{19}},
+  \bibinfo{pages}{637--642} (\bibinfo{year}{2010}).
+
+\bibitem{zhang:2017:comparison}
+\bibinfo{author}{Zhang, X.} \emph{et~al.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{{C}omparison of {G}laucoma
+  {P}rogression {D}etection by {O}ptical {C}oherence {T}omography and {V}isual
+  {F}ield}}}.
+\newblock {\emph{\JournalTitle{Am. J. Ophthalmol.}}}
+  \textbf{\bibinfo{volume}{184}}, \bibinfo{pages}{63--74}
+  (\bibinfo{year}{2017}).
+
+\bibitem{kassambara:2017:practical}
+\bibinfo{author}{Kassambara, A.}
+\newblock \emph{\bibinfo{title}{Practical guide to cluster analysis in R.}}
+  (\bibinfo{publisher}{STHDA}, \bibinfo{year}{2017}).
+
+\bibitem{germano:2017:evaluation}
+\bibinfo{author}{Germano, R. A.~S.}, \bibinfo{author}{de~Moraes, C.~G.},
+  \bibinfo{author}{Susanna, R.}, \bibinfo{author}{Dantas, D.~O.} \&
+  \bibinfo{author}{Neto, E. D.~S.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{{E}valuation of a {N}ovel {V}isual
+  {F}ield {A}nalyzer {A}pplication for {A}utomated {C}lassification of
+  {G}laucoma {S}everity}}}.
+\newblock {\emph{\JournalTitle{J. Glaucoma}}} \textbf{\bibinfo{volume}{26}},
+  \bibinfo{pages}{586--591} (\bibinfo{year}{2017}).
+
+\bibitem{miguel:2019:diagnostic}
+\bibinfo{author}{Miguel, A. I.~M.}, \bibinfo{author}{Silva, A.~B.} \&
+  \bibinfo{author}{Azevedo, L.~F.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{{D}iagnostic performance of
+  optical coherence tomography angiography in glaucoma: a systematic review and
+  meta-analysis}}}.
+\newblock {\emph{\JournalTitle{Br J Ophthalmol}}}
+  \textbf{\bibinfo{volume}{103}}, \bibinfo{pages}{1677--1684}
+  (\bibinfo{year}{2019}).
+
+\bibitem{rabiolo:2018:comparison}
+\bibinfo{author}{Rabiolo, A.} \emph{et~al.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{{C}omparison of methods to
+  quantify macular and peripapillary vessel density in optical coherence
+  tomography angiography}}}.
+\newblock {\emph{\JournalTitle{PLoS ONE}}} \textbf{\bibinfo{volume}{13}},
+  \bibinfo{pages}{e0205773} (\bibinfo{year}{2018}).
+
+\bibitem{hollo:2018:optical}
+\bibinfo{author}{Hollo, G.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{{O}ptical {C}oherence {T}omography
+  {A}ngiography in {G}laucoma}}}.
+\newblock {\emph{\JournalTitle{Turk J Ophthalmol}}}
+  \textbf{\bibinfo{volume}{48}}, \bibinfo{pages}{196--201}
+  (\bibinfo{year}{2018}).
+
+\bibitem{saba:2018:fundus}
+\bibinfo{author}{Saba, T.}, \bibinfo{author}{Bokhari, S. T.~F.},
+  \bibinfo{author}{Sharif, M.}, \bibinfo{author}{Yasmin, M.} \&
+  \bibinfo{author}{Raza, M.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{{F}undus image classification
+  methods for the detection of glaucoma: {A} review}}}.
+\newblock {\emph{\JournalTitle{Microsc. Res. Tech.}}}
+  \textbf{\bibinfo{volume}{81}}, \bibinfo{pages}{1105--1121}
+  (\bibinfo{year}{2018}).
+
+\bibitem{danthurebandara:2016:diagnostic}
+\bibinfo{author}{Danthurebandara, V.~M.} \emph{et~al.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{{D}iagnostic {A}ccuracy of
+  {G}laucoma {W}ith {S}ector-{B}ased and a {N}ew {T}otal {P}rofile-{B}ased
+  {A}nalysis of {N}euroretinal {R}im and {R}etinal {N}erve {F}iber {L}ayer
+  {T}hickness}}}.
+\newblock {\emph{\JournalTitle{Invest. Ophthalmol. Vis. Sci.}}}
+  \textbf{\bibinfo{volume}{57}}, \bibinfo{pages}{181--187}
+  (\bibinfo{year}{2016}).
+
+\bibitem{fan:2017:enhanced}
+\bibinfo{author}{Fan, K.~C.} \emph{et~al.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{{E}nhanced {D}iagnostic
+  {C}apability for {G}laucoma of 3-{D}imensional {V}ersus 2-{D}imensional
+  {N}euroretinal {R}im {P}arameters {U}sing {S}pectral {D}omain {O}ptical
+  {C}oherence {T}omography}}}.
+\newblock {\emph{\JournalTitle{J. Glaucoma}}} \textbf{\bibinfo{volume}{26}},
+  \bibinfo{pages}{450--458} (\bibinfo{year}{2017}).
+
+\bibitem{zheng:2019:diagnostic}
+\bibinfo{author}{Zheng, F.}, \bibinfo{author}{Yu, M.} \&
+  \bibinfo{author}{Leung, C.~K.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{{D}iagnostic criteria for
+  detection of retinal nerve fibre layer thickness and neuroretinal rim width
+  abnormalities in glaucoma}}}.
+\newblock {\emph{\JournalTitle{Br J Ophthalmol}}}  (\bibinfo{year}{2019}).
+
+\bibitem{zheng:2019:artificial}
+\bibinfo{author}{Zheng, C.}, \bibinfo{author}{Johnson, T.~V.},
+  \bibinfo{author}{Garg, A.} \& \bibinfo{author}{Boland, M.~V.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{{A}rtificial intelligence in
+  glaucoma}}}.
+\newblock {\emph{\JournalTitle{Curr Opin Ophthalmol}}}
+  \textbf{\bibinfo{volume}{30}}, \bibinfo{pages}{97--103}
+  (\bibinfo{year}{2019}).
+
+\bibitem{chauhan:2013:enhanced}
+\bibinfo{author}{Chauhan, B.~C.} \emph{et~al.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{{E}nhanced detection of open-angle
+  glaucoma with an anatomically accurate optical coherence tomography-derived
+  neuroretinal rim parameter}}}.
+\newblock {\emph{\JournalTitle{Ophthalmology}}} \textbf{\bibinfo{volume}{120}},
+  \bibinfo{pages}{535--543} (\bibinfo{year}{2013}).
+
+\bibitem{brusini:2018:glaucoma}
+\bibinfo{author}{Brusini, P.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{{O}{C}{T} {G}laucoma {S}taging
+  {S}ystem: a new method for retinal nerve fiber layer damage classification
+  using spectral-domain {O}{C}{T}}}}.
+\newblock {\emph{\JournalTitle{Eye (Lond)}}} \textbf{\bibinfo{volume}{32}},
+  \bibinfo{pages}{113--119} (\bibinfo{year}{2018}).
+
+\bibitem{reis:2012:influence}
+\bibinfo{author}{Reis, A.~S.} \emph{et~al.}
+\newblock \bibinfo{journal}{\bibinfo{title}{{{I}nfluence of clinically
+  invisible, but optical coherence tomography detected, optic disc margin
+  anatomy on neuroretinal rim evaluation}}}.
+\newblock {\emph{\JournalTitle{Invest. Ophthalmol. Vis. Sci.}}}
+  \textbf{\bibinfo{volume}{53}}, \bibinfo{pages}{1852--1860}
+  (\bibinfo{year}{2012}).
+
+\bibitem{sanchez:2015:bringing}
+\bibinfo{author}{S{\'a}nchez-Alberca, A.}
+\newblock \bibinfo{journal}{\bibinfo{title}{Bringing r to non-expert users with
+  the package rkteaching.bolet\'{\i}n de estad\'{\i}stica e investigaci\'on
+  operativa (beio).}}
+\newblock }}} \textbf{\bibinfo{volume}{31}}, \bibinfo{pages}{170--188}
+  (\bibinfo{year}{2015}).
+
+\end{thebibliography}

@@ -27,7 +27,8 @@ lapply(.packages, require, character.only=T)
 fviz_nbclust(data.glaucoma[, varRims], kmeans, method = "wss") + 
   xlab("Number of clusters") + 
   ylab("Intra-groups sum of squares") + 
-  ggtitle("Reduction of intra-groups variability according to the number of clusters")
+  ggtitle("Reduction of intra-group variability according to the number of clusters")
+ggsave("img/reduction-variability-clusters.pdf", width = 7, height = 5)
 ```
 
 According to the elbow criteria we decided to create 4 clusters, since the reduction in the intra-groups variability is not important for more than 4 groups.
@@ -82,8 +83,9 @@ fviz_pca_ind(
   xlab("First principal component") +
   ylab("Second principal component") +
   scale_shape_manual(values = shapes[-1]) +
-  theme(legend.position = "top") +
-  theme(plot.title = element_text(hjust = 0.5))
+  coord_flip(clip = "off") +
+  theme(legend.position = "top", plot.title = element_text(hjust = 0.5))
+ggsave("img/map-clusters-whithout-healthy.pdf")
 ```
 
 As can be seen in this chart, the four clusters can be separated almost perfectly along the x-axis of the first principal component. 
@@ -100,14 +102,14 @@ fviz_pca_ind(
   palette = palette.healthy,
   addEllipses = T,
   ellipse.type = "t",
-  title = "Map of glaucoma stages including healthy on the first two principal components",
+  title = "Map of glaucoma stages, with healthy eyes, on the first two principal components",
   legend.title = "Stage"
 ) +
   xlab("First principal component") +
   ylab("Second principal component") +
   scale_shape_manual(values = shapes) +
-  theme(legend.position = "top") +
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(legend.position = "top", plot.title = element_text(hjust = 0.5))
+ggsave("img/map-clusters-with-healthy.pdf")
 ```
 
 ## Distribution of the first principal component by glaucoma stages
@@ -119,11 +121,12 @@ data.pca <- as.data.frame(result.pca$ind$coord)
 data.pca$Stage <- data$Stage
 ggplot(data.pca, aes(x = Dim.1)) +
   geom_density(aes(fill = Stage), colour = I("white"), position = "identity", alpha = .5) + 
-  ggtitle("Distribution of the first principal component according to glacuoma stages") +
+  ggtitle("Distribution of the first principal component according to glaucoma stages") +
   xlab("First principal component") +
+  ylab("Probability density") +
   scale_fill_manual(values = palette.healthy) +
-  theme(legend.position = "top") +
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(legend.position = "top", plot.title = element_text(hjust = 0.5))
+ggsave("img/clusters-distributions.pdf", width = 7, height = 5)
 ```
 
 ## Confidence intervals of means by glaucoma stages

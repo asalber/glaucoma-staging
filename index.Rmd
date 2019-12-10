@@ -42,11 +42,11 @@ source("data-loading.R")
 ```
 
 
-Total number of eyes: `r nrow(data)`
+Total number of eyes: **1001** (766 Healthy and 235 with Glaucoma).
 ```{r sample-size-groups}
-table.sizes <- table(data$Glaucoma)
-names(table.sizes) <- c("Healthy", "Glaucoma")
-print(table.sizes)
+# table.sizes <- table(data$Glaucoma)
+# names(table.sizes) <- c("Healthy", "Glaucoma")
+# print(table.sizes)
 ```
 
 # Variables
