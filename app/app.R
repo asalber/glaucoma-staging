@@ -50,19 +50,28 @@ ui <- fluidPage(
     
     # App title ----
     titlePanel("Glaucoma staging system"),
+    fluidRow(
+        column(2,
+               textInput('id', "Patient ID", ""),
+        ),
+        column(2,
+               dateInput("date", "Date", value = Sys.Date(), format = "dd-mm-yyyy"),
+        ),
+        column(8,
+               radioButtons("diagnosed", "Has the patient been previously diagnosed with glaucoma?", choices = c("Yes", "No"), inline = T),
+        )
+    ),
     
     # Sidebar layout with input and output definitions ----
     sidebarLayout(
         # Sidebar panel for inputs
         sidebarPanel(
-            radioButtons("diagnosed", "Have you been diagnosed with glaucoma?", choices = c("Yes", "No"), inline = T),
             h3("Eye measures"),
             # Include clarifying text
             helpText("Enter the raw retinal measures."),
-            helpText("The age of the patient and the BMO area are required to standardize data."),
             # Input fields for retinal measures
-            numericInput('age', 'AGE', 0),
-            numericInput('bmoarea', 'BMO area', 0),
+            numericInput('age', 'AGE¹', 0),
+            numericInput('bmoarea', 'BMO area¹', 0),
             numericInput('bmog', 'BMO.G', 0),
             numericInput('bmoti', 'BMO.TI', 0),
             numericInput('rim35g', 'RIM3.5.G', 0),
@@ -73,7 +82,9 @@ ui <- fluidPage(
             # doing it immediately when inputs change). This is useful if
             # the computations required to render output are inordinately
             # time-consuming.
-            actionButton("prediction", "Predict")
+            actionButton("prediction", "Predict"),
+            hr(),
+            helpText("¹: The age of the patient and the BMO area are required to standardize data."),
             
         ),
         
