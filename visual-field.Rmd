@@ -1,0 +1,62 @@
+---
+title: "Glaucoma staging study"
+date: "`r Sys.Date()`"
+---
+
+```{r knitr-init, echo=F}
+library(knitr)
+## Global options
+options(digits = 4)
+opts_chunk$set(echo=F, cache=T, prompt=F, tidy=T, comment=NA, message=F, warning=F, dev="png", dev.args=list(type="cairo"), dpi=300)
+```
+
+```{r packages, results='hide'}
+.packages <- c("tidyverse", "pander")
+.installed <- .packages %in% installed.packages()
+if (length(.packages[!.installed])>0) install.packages(.packages[!.installed])
+lapply(.packages, require, character.only=T)
+```
+
+```{r data-loading, results='hide'}
+data <- read_csv('data/visual-field.csv')
+```
+
+```{r data-filtering, results='hide'}
+data <- data %>%  # Elminar los casos sin datos en la variable Dm
+  filter(!is.na(Dm)) %>% # Eliminar los casos con errores mayores del 16%
+  filter(ERROR <= 16)
+```
+
+# Analysis of visual field 
+
+## Boxplot of visual field by Glaucoma stages
+
+```{r distribution}
+palette.healthy <- c("#00FF00", "#3FBF00", "#7F7F00", "#BF3F00", "#FF0000")
+palette <- palette.healthy[-1]
+
+data %>% 
+  ggplot(aes(x=Dm, fill=Stage)) +
+  geom_boxplot() +
+  scale_fill_manual(values = palette)
+```
+
+## Conficence intervals for the mean by Glaucoma stages
+
+```{r confidence-intervals}
+means <- data %>% 
+  group_by(Stage) %>%
+  summarise(n=n(), mean = mean(Dm), sd= sd(Dm)) %>%
+  mutate(se = sd / sqrt(n), lo.ci = mean - qt(1 - (0.05 / 2), n - 1) * se, up.ci = mean + qt(1 - (0.05 / 2), n - 1) * se)
+kable(means)
+```
+
+```{r confidence-intervals-plot}
+# Color palette
+ggplot(means, aes(x=Stage, y = mean, colour = Stage, shape = Stage)) +
+  geom_pointrange(aes(ymin = lo.ci, ymax = up.ci), position = position_dodge(width = 0.5)) +
+  ggtitle("Confidence intervals for the means of the visual field by Glaucoma Stages") +
+  scale_colour_manual(values = palette) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.5), plot.title = element_text(hjust = 0.5))
+```
+

@@ -35,3 +35,50 @@ for (i in colnames(data.rims)[12:ncol(data.rims)]){
 
 # Export data
 write.csv(file="data/data-preprocessed.csv", data.rims, row.names=F)
+
+
+
+# Resumen estadístico 
+library(skimr)
+library(xtable)
+
+data <- data.rims
+
+# Set of variables
+varBMO <- startsWith(colnames(data),"BMO")
+varBMO[11] <- F
+varBMO <- colnames(data)[varBMO]
+var3.5 <- startsWith(colnames(data),"Rim3.5")
+var3.5 <- colnames(data)[var3.5]
+var4.1 <- startsWith(colnames(data),"Rim4.1")
+var4.1 <- colnames(data)[var4.1]
+var4.7 <- startsWith(colnames(data),"Rim4.7")
+var4.7 <- colnames(data)[var4.7]
+varG <- endsWith(colnames(data), ".G")
+varG <- colnames(data[varG])
+varTI <- endsWith(colnames(data), ".TI")
+varTI <- colnames(data[varTI])
+varT <- endsWith(colnames(data), ".T")
+varT <- colnames(data[varT])
+varTS <- endsWith(colnames(data), ".TS")
+varTS <- colnames(data[varTS])
+varNS <- endsWith(colnames(data), ".NS")
+varNS <- colnames(data[varNS])
+varN <- endsWith(colnames(data), ".N")
+varN <- colnames(data[varN])
+varNI <- endsWith(colnames(data), ".NI")
+varNI <- colnames(data[varNI])
+varRims <- c(varBMO, var3.5, var4.1, var4.7)
+varSectors <- c(varG, varTI, varT, varTS, varNS, varN, varNI)
+
+# Variables selection
+data %<>% dplyr::select(c("Id", "Age", "BMO.Area", "Eye", "Glaucoma", varRims))
+# Select complete cases
+data <- data[complete.cases(data), ]
+
+summary <- data %>% 
+  filter(Eye == "L") %>%
+  group_by(Glaucoma) %>%
+  skim()
+print(xtable(summary[-c(1:4) ,c("skim_variable", "Glaucoma", "numeric.mean", "numeric.sd" )]), include.rownames = FALSE)
+

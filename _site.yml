@@ -12,6 +12,8 @@ navbar:
     href: principal-components.html
   - text: Clusters
     href: clusters.html
+  - text: Visual field
+    href: visual-field.html
   - text: Discriminant analysis
     href: linear-discriminant-analysis.html
   - text: App

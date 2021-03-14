@@ -1,0 +1,29 @@
+---
+title: "Estudio sobre el Glaucoma"
+date: "`r Sys.Date()`"
+---
+
+```{r knitr-init, echo=F}
+library(knitr)
+## Global options
+options(digits = 4)
+opts_chunk$set(echo=F, cache=T, prompt=F, tidy=T, comment=NA, message=F, warning=F, dev="png", dev.args=list(type="cairo"), dpi=300)
+```
+
+```{r data-loading, results='hide'}
+source("data-loading.R")
+```
+
+```{r packages}
+library(skimr)
+```
+
+
+# Tamaño muestral
+
+```{r sample size}
+data %>%
+  group_by(Glaucoma) %>%
+  count()
+```
+

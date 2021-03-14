@@ -15,7 +15,7 @@ source("data-loading.R")
 ```
 
 ```{r packages, results='hide'}
-.packages <- c("FactoMineR", "factoextra")
+.packages <- c("FactoMineR", "factoextra", "gridExtra")
 .installed <- .packages %in% installed.packages()
 if (length(.packages[!.installed])>0) install.packages(.packages[!.installed])
 lapply(.packages, require, character.only=T)
@@ -44,9 +44,19 @@ fviz_cos2(result.pca,
   theme(plot.title = element_text(hjust = 0.5))
 ggsave("img/correlation-pca.pdf", width = 7, height = 5)
 
-# Contribution of variables to principal
-fviz_contrib(result.pca, choice="var", axes=1, top = 10) +
+# Contribution of variables to first principal component
+p1 <- fviz_contrib(result.pca, choice="var", axes=1, top = 10) +
   theme(plot.title = element_text(hjust = 0.5))
+ggsave("img/contribution-variables-pca-dim1.pdf", width = 7, height = 5)
+# Contribution of variables to second principal component
+p2 <- fviz_contrib(result.pca, choice="var", axes=2, top = 10) +
+  theme(plot.title = element_text(hjust = 0.5))
+ggsave("img/contribution-variables-pca-dim2.pdf", width = 7, height = 5)
+# Contribution of variables to third principal component
+p3 <- fviz_contrib(result.pca, choice="var", axes=3, top = 10) +
+  theme(plot.title = element_text(hjust = 0.5))
+ggsave("img/contribution-variables-pca-dim3.pdf", width = 7, height = 5)
+grid.arrange(p1, p2, p3, nrow = 1)
 ```
 
 The principal components analysis shows that the first principal component explains almost 60% of the total variability, while the second one only 11%.
@@ -54,20 +64,18 @@ The principal components analysis shows that the first principal component expla
 The variables most correlated with the first principal component are the global sector and the TI sector of BMO and RNFL rims.
 
 ```{r map-eyes-principal-components}
-# Add coordinates of principal components to data frame
-data.pca <- cbind(result.pca$ind$coord, data[, "Glaucoma", drop=F])
+palette <- c("#00FF00", "#FF0000")
 # Plot eyes on the two first principal components
 fviz_pca_ind(
   result.pca,
   geom = c("point"),
   axes = c(1, 2),
-  habillage = data.pca$Glaucoma,
+  habillage = data$Glaucoma,
+  palette = palette,
   ddEllipses = T,
   ellipse.type = "t",
   title = "Map of healthy and glaucoma eyes on the first two principal components"
 ) +
-  scale_shape_discrete(labels = c("Glaucoma", "Healthy")) +
-  scale_color_discrete(labels = c("Glaucoma", "Healthy")) +
   theme(legend.position = "top", plot.title = element_text(hjust = 0.5))
 ggsave("img/pca-map.pdf", width = 7, height = 5)
 ```

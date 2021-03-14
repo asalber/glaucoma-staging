@@ -11,7 +11,7 @@ opts_chunk$set(echo=F, cache=T, prompt=F, tidy=T, comment=NA, message=F, warning
 ```
 
 ```{r packages, results='hide'}
-.packages <- c("tidyverse", "reshape2", "FactoMineR", "MASS", "caret", "pander", "magrittr", "xtable")
+.packages <- c("tidyverse", "reshape2", "FactoMineR", "MASS", "caret", "pander")
 .installed <- .packages %in% installed.packages()
 if (length(.packages[!.installed])>0) install.packages(.packages[!.installed])
 lapply(.packages, require, character.only=T)
@@ -23,7 +23,7 @@ panderOptions('keep.line.breaks', TRUE)
 
 ```{r data-loading, results='hide'}
 # Data loading
-data <- read.csv(file="data/data-preprocessed-clusters.csv", header=T, sep=",")
+data <- read_csv(file="data/data-preprocessed-clusters.csv", col_types = cols(Eye = "f", Glaucoma = "f", Stage = "f"))
 # Data without healthy eyes
 data.glaucoma <- droplevels(data[data$Stage != "Healthy", ])
 
@@ -31,11 +31,11 @@ data.glaucoma <- droplevels(data[data$Stage != "Healthy", ])
 varBMO <- startsWith(colnames(data),"BMO")
 varBMO[11] <- F
 varBMO <- colnames(data)[varBMO]
-var3.5 <- startsWith(colnames(data),"Rim3.5")
+var3.5 <- startsWith(colnames(data),"RNFL3.5")
 var3.5 <- colnames(data)[var3.5]
-var4.1 <- startsWith(colnames(data),"Rim4.1")
+var4.1 <- startsWith(colnames(data),"RNFL4.1")
 var4.1 <- colnames(data)[var4.1]
-var4.7 <- startsWith(colnames(data),"Rim4.7")
+var4.7 <- startsWith(colnames(data),"RNFL4.7")
 var4.7 <- colnames(data)[var4.7]
 varG <- endsWith(colnames(data), ".G")
 varG <- colnames(data[varG])
@@ -82,76 +82,96 @@ classify <- function(data, vars){
 
 ```{r model-comparison}
 # Comparison of classification models with different variables
-          accuracy.table <- data.frame(vars=character(), accuracy1=double(), accuracy2=double())
-          # All the variables
-          vars <- "All the variables"
-          classification.glaucoma <- classify(data.glaucoma, vars=varRims)
-          classification <- classify(data, vars=varRims)
-          accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
-          # Clusters basados en todos los sectores globales y temporales inferiores
-          vars <- "Sectors G and TI of BMO and all the rims"
-          classification.glaucoma <- classify(data.glaucoma, vars=c(varG, varTI))
-          classification <- classify(data, vars=c(varG, varTI))
-          accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
-          # classification basados en todos los sectores globales
-          vars <- "Sectors G of BMO and all the rims"
-          classification.glaucoma <- classify(data.glaucoma, vars=varG)
-          classification <- classify(data, vars=varG)
-          accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
-          # classification basados en todos los sectores temporales inferiores
-          vars <- "Sectors TI of BMO and all the rims"
-          classification.glaucoma <- classify(data.glaucoma, vars=varTI)
-          classification <- classify(data, vars=varTI)
-          accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
-          # classification basados en los sectores global y temporal inferior de losa Rims BMO y 3.5
-          vars <- "Sectors G and TI of BMO and 3.5 rim"
-          classification.glaucoma <- classify(data.glaucoma, vars=c("BMO.G", "BMO.TI", "Rim3.5.G", "Rim3.5.TI"))
-          classification <- classify(data, vars=c("BMO.G", "BMO.TI", "Rim3.5.G", "Rim3.5.TI"))
-          accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
-          # classification basados en los sectores global y temporal inferior del Rim BMO
-          vars <- "Sectors G and TI of BMO"
-          classification.glaucoma <- classify(data.glaucoma, vars=c("BMO.G", "BMO.TI"))
-          classification <- classify(data, vars=c("BMO.G", "BMO.TI"))
-          accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
-          # classification basados en los sectores global y temporal inferior del Rim 3.5
-          vars <- "Sectors G and TI of 3.5 rim"
-          classification.glaucoma <- classify(data.glaucoma, vars=c("Rim3.5.G", "Rim3.5.TI"))
-          classification <- classify(data, vars=c("Rim3.5.G", "Rim3.5.TI"))
-          accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
-          # classification basados en los sectores global de los Rims BMO y 3.5
-          vars <- "Sector G of BMO and 3.5 rim"
-          classification.glaucoma <- classify(data.glaucoma, vars=c("BMO.G", "Rim3.5.G"))
-          classification <- classify(data, vars=c("BMO.G", "Rim3.5.G"))
-          accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
-          # classification basados en los sectores temporales inferiores de los Rims BMO y 3.5
-          vars <- "Sector TI of BMO and 3.5 rim"
-          classification.glaucoma <- classify(data.glaucoma, vars=c("BMO.TI", "Rim3.5.TI"))
-          classification <- classify(data, vars=c("BMO.TI", "Rim3.5.TI"))
-          accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
-          # classification basados el sector global del Rim BMO
-          vars <- "Sector G of BMO"
-          classification.glaucoma <- classify(data.glaucoma, vars="BMO.G")
-          classification <- classify(data, vars="BMO.G")
-          accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
-          # classification basados el sector global del Rim 3.5
-          vars <- "Sector G of 3.5 rim"
-          classification.glaucoma <- classify(data.glaucoma, vars="Rim3.5.G")
-          classification <- classify(data, vars="Rim3.5.G")
-          accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
-          # classification basados el sector temporal inferior del Rim BMO
-          vars <- "Sector TI of BMO"
-          classification.glaucoma <- classify(data.glaucoma, vars="BMO.TI")
-          classification <- classify(data, vars="BMO.TI")
-          accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
-          # classification basados el sector temporal inferior del Rim 3.5
-          vars <- "Sector TI of 3.5 rim"
-          classification.glaucoma <- classify(data.glaucoma, vars="Rim3.5.TI")
-          classification <- classify(data, vars="Rim3.5.TI")
-          accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
-          
-          colnames(accuracy.table) <- c("Variable used in the model", "Overall accuracy<br> without healthy eyes", "Overall accuracy<br> with healthty eyes")
-          pander(accuracy.table, justify = c('left', 'right', 'right'),  split.cells = c(25, 1, 1))
-          #   xtable(accuracy.table)
+accuracy.table <- data.frame(vars=character(), accuracy1=double(), accuracy2=double())
+# All the variables
+vars <- "All the variables"
+classification.glaucoma <- classify(data.glaucoma, vars=varRims)
+classification <- classify(data, vars=varRims)
+accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
+# Todos los sectores globales y temporales inferiores
+vars <- "Sectors G and TI of BMO and all the RNFL"
+classification.glaucoma <- classify(data.glaucoma, vars=c(varG, varTI))
+classification <- classify(data, vars=c(varG, varTI))
+accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
+# Sector G del BMO y todos los sectores globales y temporales inferiores del RNFL
+vars <- "Sectors G of BMO and G and TI of all the RNFL"
+classification.glaucoma <- classify(data.glaucoma, vars=c(varG, "RNFL3.5.TI", "RNFL4.1.TI", "RNFL4.7.TI"))
+classification <- classify(data, vars=c(varG, "RNFL3.5.TI", "RNFL4.1.TI", "RNFL4.7.TI"))
+accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
+# Sector G del BMO y todos los sectores globales y temporales inferiores del RNFL
+vars <- "Sectors G of BMO and all the RNFL and TI of the RNFL 3.5"
+classification.glaucoma <- classify(data.glaucoma, vars=c(varG, "RNFL3.5.TI"))
+classification <- classify(data, vars=c(varG, "RNFL3.5.TI"))
+accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
+# Todos los sectores globales y temporales inferiores del RNFL
+vars <- "Sectors G and TI of all the RNFL"
+classification.glaucoma <- classify(data.glaucoma, vars=c("RNFL3.5.G", "RNFL4.1.G", "RNFL4.7.G", "RNFL3.5.TI", "RNFL4.1.TI", "RNFL4.7.TI"))
+classification <- classify(data, vars=c("RNFL3.5.G", "RNFL4.1.G", "RNFL4.7.G", "RNFL3.5.TI", "RNFL4.1.TI", "RNFL4.7.TI"))
+accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
+# Todos los sectores globales
+vars <- "Sectors G of BMO and all the RNFL"
+classification.glaucoma <- classify(data.glaucoma, vars=varG)
+classification <- classify(data, vars=varG)
+accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
+# Todos los sectores temporales inferiores
+vars <- "Sectors TI of BMO and all the RNFL"
+classification.glaucoma <- classify(data.glaucoma, vars=varTI)
+classification <- classify(data, vars=varTI)
+accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
+# classification basados en los sectores global y temporal inferior del BMO y RNFL 3.5
+vars <- "Sectors G and TI of BMO and 3.5 RNFL"
+classification.glaucoma <- classify(data.glaucoma, vars=c("BMO.G", "BMO.TI", "RNFL3.5.G", "RNFL3.5.TI"))
+classification <- classify(data, vars=c("BMO.G", "BMO.TI", "RNFL3.5.G", "RNFL3.5.TI"))
+accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
+# classification basados en los sectores global del BMO y global y temporal inferior del RNFL 3.5
+vars <- "Sectors G of BMO and G and TI of 3.5 RNFL"
+classification.glaucoma <- classify(data.glaucoma, vars=c("BMO.G", "RNFL3.5.G", "RNFL3.5.TI"))
+classification <- classify(data, vars=c("BMO.G", "RNFL3.5.G", "RNFL3.5.TI"))
+accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
+# classification basados en los sectores global y temporal inferior del RNFL BMO
+vars <- "Sectors G and TI of BMO"
+classification.glaucoma <- classify(data.glaucoma, vars=c("BMO.G", "BMO.TI"))
+classification <- classify(data, vars=c("BMO.G", "BMO.TI"))
+accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
+# classification basados en los sectores global y temporal inferior del RNFL 3.5
+vars <- "Sectors G and TI of 3.5 RNFL"
+classification.glaucoma <- classify(data.glaucoma, vars=c("RNFL3.5.G", "RNFL3.5.TI"))
+classification <- classify(data, vars=c("RNFL3.5.G", "RNFL3.5.TI"))
+accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
+# classification basados en los sectores global de los RNFLs BMO y 3.5
+vars <- "Sector G of BMO and 3.5 RNFL"
+classification.glaucoma <- classify(data.glaucoma, vars=c("BMO.G", "RNFL3.5.G"))
+classification <- classify(data, vars=c("BMO.G", "RNFL3.5.G"))
+accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
+# classification basados en los sectores temporales inferiores de los RNFLs BMO y 3.5
+vars <- "Sector TI of BMO and 3.5 RNFL"
+classification.glaucoma <- classify(data.glaucoma, vars=c("BMO.TI", "RNFL3.5.TI"))
+classification <- classify(data, vars=c("BMO.TI", "RNFL3.5.TI"))
+accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
+# classification basados el sector global del RNFL BMO
+vars <- "Sector G of BMO"
+classification.glaucoma <- classify(data.glaucoma, vars="BMO.G")
+classification <- classify(data, vars="BMO.G")
+accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
+# classification basados el sector global del RNFL 3.5
+vars <- "Sector G of 3.5 RNFL"
+classification.glaucoma <- classify(data.glaucoma, vars="RNFL3.5.G")
+classification <- classify(data, vars="RNFL3.5.G")
+accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
+# classification basados el sector temporal inferior del RNFL BMO
+vars <- "Sector TI of BMO"
+classification.glaucoma <- classify(data.glaucoma, vars="BMO.TI")
+classification <- classify(data, vars="BMO.TI")
+accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
+# classification basados el sector temporal inferior del RNFL 3.5
+vars <- "Sector TI of 3.5 RNFL"
+classification.glaucoma <- classify(data.glaucoma, vars="RNFL3.5.TI")
+classification <- classify(data, vars="RNFL3.5.TI")
+accuracy.table %<>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
+
+colnames(accuracy.table) <- c("Variable used in the model", "Overall accuracy<br> without healthy eyes", "Overall accuracy<br> with healthty eyes")
+pander(accuracy.table, justify = c('left', 'right', 'right'),  split.cells = c(25, 1, 1))
+#   xtable(accuracy.table)
 ```
 
 ## Model using all the variables
@@ -160,13 +180,16 @@ classify <- function(data, vars){
 
 ```{r confusion-matrix-without-healthy-eyes}
 classification.glaucoma <- classify(data.glaucoma, vars=varRims)
+# print(xtable(classification.glaucoma$performance$table, type = "latex"))
 pander(classification.glaucoma$performance$table)
+
 ```
 
 ### Performance without healthy eyes
 
 ```{r performance-without-healthy-eyes}
 pander(classification.glaucoma$performance$byClass, split.cells = 1)
+# kbl(classification.glaucoma$performance$byClass) %>% kable_styling()
 # xtable(classification.glaucoma$performance$byClass[,c(1,2,11)])
 ```
 
@@ -174,6 +197,7 @@ pander(classification.glaucoma$performance$byClass, split.cells = 1)
 
 ```{r confusion-matrix-with-healthy-eyes}
 classification <- classify(data, vars=varRims)
+# print(xtable(classification$performance$table, type = "latex"))
 pander(classification$performance$table)
 ```
 
@@ -184,12 +208,12 @@ pander(classification$performance$byClass, split.cells = 1)
 # xtable(classification$performance$byClass[,c(1,2,11)])
 ```
 
-## Model using sectors G and TI of BMO and all the rims
+## Model using sectors G BMO and all the RNFL and sector TI of RNFL
 
 ### Confusion matrix without healthy eyes
 
 ```{r confusion-matrix-without-healthy-eyes-G-TI}
-classification.glaucoma <- classify(data.glaucoma, vars=c(varG, varTI))
+classification.glaucoma <- classify(data.glaucoma, vars=c(varG, "RNFL3.5.TI"))
 pander(classification.glaucoma$performance$table)
 ```
 
@@ -202,7 +226,7 @@ pander(classification.glaucoma$performance$byClass, split.cells = 1)
 ### Confusion matrix with healthy eyes
 
 ```{r confusion-matrix-with-healthy-eyes-G-TI}
-classification <- classify(data, vars=c(varG, varTI))
+classification <- classify(data, vars=c(varG, "RNFL3.5.TI"))
 pander(classification$performance$table)
 ```
 
@@ -212,14 +236,14 @@ pander(classification$performance$table)
 pander(classification$performance$byClass, split.cells = 1)
 ```
 
-## Model using sectors G and TI of BMO and 3.5 rim
+## Model using sectors G and TI of BMO and RNFL 3.5
 
 ### Discriminant functions without healthy eyes
 
 Coefficients of the linear discriminant functions:
 
 ```{r discriminant-coeffitients-without-healthy-eyes-G-TI-BMO-3.5}
-classification.glaucoma <- classify(data.glaucoma, vars=c("BMO.G", "BMO.TI", "Rim3.5.G", "Rim3.5.TI"))
+classification.glaucoma <- classify(data.glaucoma, vars=c("BMO.G", "BMO.TI", "RNFL3.5.G", "RNFL3.5.TI"))
 pander(classification.glaucoma$pc$rotation %*% classification.glaucoma$da$scaling)
 ```
 
@@ -227,6 +251,7 @@ pander(classification.glaucoma$pc$rotation %*% classification.glaucoma$da$scalin
 
 ```{r confusion-matrix-without-healthy-eyes-G-TI-BMO-3.5}
 pander(classification.glaucoma$performance$table)
+# print(xtable(classification.glaucoma$performance$table, type = "latex"))
 ```
 
 ### Performance without healthy eyes
@@ -241,7 +266,7 @@ pander(classification.glaucoma$performance$byClass, split.cells = 1)
 Coefficients of the linear discriminant functions:
 
 ```{r discriminant-coeffitients-with-healthy-eyes-G-TI-BMO-3.5}
-classification <- classify(data, vars=c("BMO.G", "BMO.TI", "Rim3.5.G", "Rim3.5.TI"))
+classification <- classify(data, vars=c("BMO.G", "BMO.TI", "RNFL3.5.G", "RNFL3.5.TI"))
 pander(classification$pc$rotation %*% classification$da$scaling)
 ```
 
@@ -249,20 +274,21 @@ pander(classification$pc$rotation %*% classification$da$scaling)
   
 ```{r confusion-matrix-with-healthy-eyes-G-TI-BMO-3.5}
 pander(classification$performance$table)
+# print(xtable(classification$performance$table, type = "latex"))
 ```
 
 ### Performance with healthy eyes
 
 ```{r performance-with-healthy-eyes-G-TI-BMO-3.5}
 pander(classification$performance$byClass, split.cells = 1)
-# xtable(classification$performance$byClass[,c(1,2,11)])
+    # xtable(classification$performance$byClass[,c(1,2,11)])
 ```
 
 
-### Main statistics for the distribution of BMO.G, BMO.TI, Rim3.5.G and Rim3.5.TI by stages
+### Main statistics for the distribution of BMO.G, Rim3.5.G and Rim3.5.TI by stages
 ```{r confidence-intervals-means-clusters}
 # Means of variables by stages
-melted.data <- melt(data[, c("Stage", vars=c("BMO.G", "BMO.TI", "Rim3.5.G", "Rim3.5.TI"))])
+melted.data <- melt(data[, c("Stage", vars=c("BMO.G", "BMO.TI", "RNFL3.5.G", "RNFL3.5.TI"))])
 colnames(melted.data)[2] <- "Sector" 
 means <- melted.data %>% group_by(Sector, Stage) %>% 
   summarise(n = n(), mean = mean(value, na.rm = T), sd = sd(value, na.rm = T))  %>%
@@ -278,9 +304,10 @@ palette.healthy <- c("#00BFC4", palette)
 # Plot of means by stages
 ggplot(means, aes(x = Sector, y = mean, colour = Stage, shape = Stage)) +
   geom_pointrange(aes(ymin = lower.ci, ymax = upper.ci), position = position_dodge(width = 0.5)) +
-  ggtitle("Confidence intervals for the means of G and TI sectors\n of BMO and RNFL 3.5 rim by glaucoma stages") +
+  ggtitle("Confidence intervals for the means of G and TI sectors\n of BMO and RNFL 3.5 by glaucoma stages") +
   scale_colour_manual(values = palette.healthy) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.5), plot.title = element_text(hjust = 0.5))
-ggsave("img/confidence-intervals-bmo-35-G-TI-stages.pdf")
+
+ggsave("img/confidence-intervals-bmo-35-G-TI-stages.pdf", width = 14, height = 12, units = "cm")
 ```
 

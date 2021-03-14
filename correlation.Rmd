@@ -25,12 +25,12 @@ lapply(.packages, require, character.only=T)
 
 ```{r correlation-matrix}
 # Correlation matrix
-ggcorr(data[, varSectors], hjust = 0.9, size = 3, layout.exp = 2, label = TRUE, label_size = 2, label_round = 2, low = "darkred", high = "#0072B2") +
-  ggtitle("Correlation matrix among BMO and RFNL rims by sectors") +
+  ggcorr(data[, varSectors], hjust = 0.9, size = 3, layout.exp = 2, label = TRUE, label_size = 2, label_round = 2, low = "darkred", high = "#0072B2") +
+  ggtitle("Correlation matrix considering BMO rims and RFNL sectors") +
   guides(fill = guide_colourbar(title="Pearson\ncorrelation r")) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5), plot.title = element_text(hjust = 0.5))
-ggsave(last_plot(), filename = "img/correlation-matrix-bmo-rnfl.pdf")
-```
+  ggsave(last_plot(), filename = "img/correlation-matrix-bmo-rnfl.pdf")
+  ```
 
 The correlation analysis showed a clear correlation pattern by sectors. There was a very strong correlation (r>0.9) among the thickness of the BMO and RNFL rims 3.5, 4.1 and 4.7 by sectors. There was also a strong correlation (r>0.75) among the sectors of the BMO, except the BMO.G, that presented a very strong correlation with the others sectors. On the other hand, there was a very weak correlation (r<0.2) between the T sector and the N, NI and NS sectors. The T sector was in fact, the less correlated with the rest. 
 
