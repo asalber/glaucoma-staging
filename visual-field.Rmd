@@ -100,9 +100,6 @@ data[, "Stage.VF"] <- ordered(clusters$cluster)
 # data %>% ggplot(aes(x=Dm, y=Stage.VF, colour=Stage.VF)) + geom_point()
 ```
 
-## Concordance analysis
-
-We compute the Kendall's coefficient of concordance to check the agreement between the Glaucoma stages and the visual field stages.
 
 ```{r confidence-intervals-visual-field-stages}
 means <- data %>% 
@@ -112,6 +109,9 @@ means <- data %>%
 kable(means)
 ```
 
+## Concordance analysis
+
+We compute the Kendall's coefficient of concordance to check the agreement between the Glaucoma stages and the visual field stages.
 
 ```{r Kendalls-coefficient}
 kendall(data[, c("Stage", "Stage.VF")], correct = T)
