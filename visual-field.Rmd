@@ -11,14 +11,15 @@ opts_chunk$set(echo=F, cache=T, prompt=F, tidy=T, comment=NA, message=F, warning
 ```
 
 ```{r packages, results='hide'}
-.packages <- c("tidyverse", "pander")
+.packages <- c("tidyverse", "irr")
 .installed <- .packages %in% installed.packages()
 if (length(.packages[!.installed])>0) install.packages(.packages[!.installed])
 lapply(.packages, require, character.only=T)
 ```
 
 ```{r data-loading, results='hide'}
-data <- read_csv('data/visual-field.csv')
+data <- read_csv('data/visual-field.csv', col_types = cols(Stage = "f"))
+data$Stage <- ordered(data$Stage, levels=levels(data$Stage))                 
 ```
 
 ```{r data-filtering, results='hide'}
@@ -43,13 +44,13 @@ data %>%
 
 ## Conficence intervals for the mean by Glaucoma stages
 
-```{r confidence-intervals}
-means <- data %>% 
-  group_by(Stage) %>%
-  summarise(n=n(), mean = mean(Dm), sd= sd(Dm)) %>%
-  mutate(se = sd / sqrt(n), lo.ci = mean - qt(1 - (0.05 / 2), n - 1) * se, up.ci = mean + qt(1 - (0.05 / 2), n - 1) * se)
-kable(means)
-```
+  ```{r confidence-intervals-glaucoma-stages}
+  means <- data %>% 
+    group_by(Stage) %>%
+    summarise(n=n(), mean = mean(Dm), sd= sd(Dm)) %>%
+    mutate(se = sd / sqrt(n), lo.ci = mean - qt(1 - (0.05 / 2), n - 1) * se, up.ci = mean + qt(1 - (0.05 / 2), n - 1) * se)
+  kable(means)
+  ```
 
 ```{r confidence-intervals-plot}
 # Color palette
@@ -59,4 +60,62 @@ ggplot(means, aes(x=Stage, y = mean, colour = Stage, shape = Stage)) +
   scale_colour_manual(values = palette) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.5), plot.title = element_text(hjust = 0.5))
 ```
+
+## Visual field stages
+
+We define 4 stages using the visual field. 
+
+```{r k-means-clusters}
+# K-means clusters
+seed = 123
+# Variables considered
+vars = "Dm"
+# Número de clusters
+n = 4
+labels <- c("I", "II", "III", "IV")
+# Color palette
+# colfunc <- colorRampPalette(c("#FD8D3C", "#800026"))
+#palette.healty <- colorRamps::green2red(5)
+palette.healthy <- c("#00FF00", "#3FBF00", "#7F7F00", "#BF3F00", "#FF0000")
+palette <- palette.healthy[-1]
+# palette.healthy <- c("#00BFC4", palette)
+# Shapes
+shapes <- c(1, 3, 15, 17, 16)
+# k-means
+# C <- chol( var(data[data$Glaucoma=="Y", vars]) )
+# y <- as.matrix(data[data$Glaucoma=="Y", vars]) %*% solve(C)
+# clusters <- kmeans(y, centers = n, nstart = 25)
+# centers <- clusters$centers[order(clusters$centers[,1], decreasing = T),]
+# clusters <- kmeans(y, centers = centers)
+
+clusters <- kmeans(data[, vars], centers = n, nstart = 25)
+centers <- clusters$centers[order(clusters$centers[,1], decreasing = T),]
+clusters <- kmeans(data[, vars], centers = centers)
+# Convert the cluster into a factor
+clusters$cluster <- as.factor(clusters$cluster)
+# Assign labels to factors
+levels(clusters$cluster) <- labels
+# Add cluster to data frame
+data[, "Stage.VF"] <- ordered(clusters$cluster)
+# data %>% ggplot(aes(x=Dm, y=Stage.VF, colour=Stage.VF)) + geom_point()
+```
+
+## Concordance analysis
+
+We compute the Kendall's coefficient of concordance to check the agreement between the Glaucoma stages and the visual field stages.
+
+```{r confidence-intervals-visual-field-stages}
+means <- data %>% 
+  group_by(Stage.VF) %>%
+  summarise(n=n(), mean = mean(Dm), sd= sd(Dm)) %>%
+  mutate(se = sd / sqrt(n), lo.ci = mean - qt(1 - (0.05 / 2), n - 1) * se, up.ci = mean + qt(1 - (0.05 / 2), n - 1) * se)
+kable(means)
+```
+
+
+```{r Kendalls-coefficient}
+kendall(data[, c("Stage", "Stage.VF")], correct = T)
+```
+As $W=0.831$ there is a significant strong concordance between both rankings. 
+
 
