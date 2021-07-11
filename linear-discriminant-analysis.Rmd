@@ -11,13 +11,10 @@ opts_chunk$set(echo=F, cache=T, prompt=F, tidy=T, comment=NA, message=F, warning
 ```
 
 ```{r packages, results='hide'}
-.packages <- c("MASS", "tidyverse", "FactoMineR", "caret", "pander")
+.packages <- c("MASS", "tidyverse", "FactoMineR", "caret", "kableExtra")
 .installed <- .packages %in% installed.packages()
 if (length(.packages[!.installed])>0) install.packages(.packages[!.installed])
 lapply(.packages, require, character.only=T)
-panderOptions('table.alignment.default', 'right')
-panderOptions('table.alignment.rownames', "left")
-panderOptions('keep.line.breaks', TRUE)
 ```
 
 
@@ -27,7 +24,10 @@ df <- read_csv(file="data/data-preprocessed-clusters.csv", col_types = cols(Eye 
   # Reorder stage levels 
   mutate(Stage = fct_relevel(Stage, "Healthy", "I", "II", "III", "IV"))
 # Data without healthy eyes
-df.glaucoma <- droplevels(df[df$Stage != "Healthy", ])
+df.glaucoma <- df %>%
+  filter(Glaucoma == "Y") %>%
+  # Remove unused stage levels
+  mutate(Stage = fct_drop(Stage))
 
 # Set of variables
 varBMO <- startsWith(colnames(df),"BMO")
@@ -171,9 +171,8 @@ classification.glaucoma <- classify(df.glaucoma, vars="RNFL3.5.TI")
 classification <- classify(df, vars="RNFL3.5.TI")
 accuracy.table <- accuracy.table %>% add_row(vars=vars, accuracy1=classification.glaucoma$performance$overall[1], accuracy2=classification$performance$overall[1])
 
-colnames(accuracy.table) <- c("Variable used in the model", "Overall accuracy<br> without healthy eyes", "Overall accuracy<br> with healthty eyes")
-pander(accuracy.table, justify = c('left', 'right', 'right'),  split.cells = c(25, 1, 1))
-#   xtable(accuracy.table)
+colnames(accuracy.table) <- c("Variable used in the model", "Overall accuracy without healthy eyes", "Overall accuracy with healthty eyes")
+kbl(accuracy.table) %>% kable_styling(full_width = F)
 ```
 
 ## Model using all the variables
@@ -182,59 +181,54 @@ pander(accuracy.table, justify = c('left', 'right', 'right'),  split.cells = c(2
 
 ```{r confusion-matrix-without-healthy-eyes}
 classification.glaucoma <- classify(df.glaucoma, vars=varRims)
-# print(xtable(classification.glaucoma$performance$table, type = "latex"))
-pander(classification.glaucoma$performance$table)
+kbl(classification.glaucoma$performance$table) %>% kable_styling(full_width = F)
 ```
 
 ### Performance without healthy eyes
 
 ```{r performance-without-healthy-eyes}
-pander(classification.glaucoma$performance$byClass, split.cells = 1)
-# kbl(classification.glaucoma$performance$byClass) %>% kable_styling()
-# xtable(classification.glaucoma$performance$byClass[,c(1,2,11)])
+kbl(classification.glaucoma$performance$byClass) %>% kable_styling(full_width = F)
 ```
 
 ### Confusion matrix with healthy eyes
 
 ```{r confusion-matrix-with-healthy-eyes}
 classification <- classify(df, vars=varRims)
-# print(xtable(classification$performance$table, type = "latex"))
-pander(classification$performance$table)
+kbl(classification$performance$table) %>% kable_styling(full_width = F)
 ```
 
 ### Performance with healthy eyes
 
 ```{r performance-with-healthy-eyes}
-pander(classification$performance$byClass, split.cells = 1)
-# xtable(classification$performance$byClass[,c(1,2,11)])
+kbl(classification$performance$byClass) %>% kable_styling(full_width = F)
 ```
 
-## Model using sectors G BMO and all the RNFL and sector TI of RNFL
+## Model using sectors G of BMO and all the RNFL and sector TI of RNFL
 
 ### Confusion matrix without healthy eyes
 
 ```{r confusion-matrix-without-healthy-eyes-G-TI}
 classification.glaucoma <- classify(df.glaucoma, vars=c(varG, "RNFL3.5.TI"))
-pander(classification.glaucoma$performance$table)
+kbl(classification.glaucoma$performance$table) %>% kable_styling(full_width = F)
 ```
 
 ### Performance without healthy eyes
 
 ```{r performance-without-healthy-eyes-G-TI}
-pander(classification.glaucoma$performance$byClass, split.cells = 1)
+kbl(classification.glaucoma$performance$byClass) %>% kable_styling(full_width = F)
 ```
 
 ### Confusion matrix with healthy eyes
 
 ```{r confusion-matrix-with-healthy-eyes-G-TI}
 classification <- classify(df, vars=c(varG, "RNFL3.5.TI"))
-pander(classification$performance$table)
+kbl(classification$performance$table) %>% kable_styling(full_width = F)
 ```
 
 ### Performance with healthy eyes
 
 ```{r performance-with-healthy-eyes-G-TI}
-pander(classification$performance$byClass, split.cells = 1)
+kbl(classification$performance$byClass) %>% kable_styling(full_width = F)
 ```
 
 ## Model using sectors G and TI of BMO and RNFL 3.5
@@ -245,21 +239,19 @@ Coefficients of the linear discriminant functions:
 
 ```{r discriminant-coeffitients-without-healthy-eyes-G-TI-BMO-3.5}
 classification.glaucoma <- classify(df.glaucoma, vars=c("BMO.G", "BMO.TI", "RNFL3.5.G", "RNFL3.5.TI"))
-pander(classification.glaucoma$pc$rotation %*% classification.glaucoma$da$scaling)
+kbl(classification.glaucoma$pc$rotation %*% classification.glaucoma$da$scaling) %>% kable_styling(full_width = F)
 ```
 
 ### Confusion matrix without healthy eyes
 
 ```{r confusion-matrix-without-healthy-eyes-G-TI-BMO-3.5}
-pander(classification.glaucoma$performance$table)
-# print(xtable(classification.glaucoma$performance$table, type = "latex"))
+kbl(classification.glaucoma$performance$table) %>% kable_styling(full_width = F)
 ```
 
 ### Performance without healthy eyes
 
 ```{r performance-without-healthy-eyes-G-TI-BMO-3.5}
-pander(classification.glaucoma$performance$byClass, split.cells = 1)
-# xtable(classification.glaucoma$performance$byClass[,c(1,2,11)])
+kbl(classification.glaucoma$performance$byClass) %>% kable_styling(full_width = F)
 ```
 
 ### Discriminant functions with healthy eyes
@@ -268,23 +260,20 @@ Coefficients of the linear discriminant functions:
 
 ```{r discriminant-coeffitients-with-healthy-eyes-G-TI-BMO-3.5}
 classification <- classify(df, vars=c("BMO.G", "BMO.TI", "RNFL3.5.G", "RNFL3.5.TI"))
-pander(classification$pc$rotation %*% classification$da$scaling)
+kbl(classification$pc$rotation %*% classification$da$scaling) %>% kable_styling(full_width = F)
 ```
 
 ### Confusion matrix with healthy eyes
   
 ```{r confusion-matrix-with-healthy-eyes-G-TI-BMO-3.5}
-pander(classification$performance$table)
-# print(xtable(classification$performance$table, type = "latex"))
+kbl(classification$performance$table) %>% kable_styling(full_width = F)
 ```
 
 ### Performance with healthy eyes
 
 ```{r performance-with-healthy-eyes-G-TI-BMO-3.5}
-pander(classification$performance$byClass, split.cells = 1)
-    # xtable(classification$performance$byClass[,c(1,2,11)])
+kbl(classification$performance$byClass) %>% kable_styling(full_width = F)
 ```
-
 
 ### Main statistics for the distribution of BMO.G, Rim3.5.G and Rim3.5.TI by stages
 ```{r confidence-intervals-means-clusters}
@@ -297,8 +286,7 @@ df.long <- df %>%
 means <- df.long %>% group_by(Sector, Stage) %>% 
   summarise(n = n(), mean = mean(value, na.rm = T), sd = sd(value, na.rm = T))  %>%
   mutate(se = sd/sqrt(n), lower.ci = mean-qt(1-(0.05/2), n-1)*se, upper.ci = mean+qt(1-(0.05/2), n-1)*se)
-pander(means)
-#print(xtable(means), include.rownames=FALSE)
+kbl(means) %>% kable_styling(full_width = F)
 
 # Color palette
 palette.healthy <- c("#00FF00", "#3FBF00", "#7F7F00", "#BF3F00", "#FF0000")
