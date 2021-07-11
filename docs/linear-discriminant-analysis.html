@@ -10,17 +10,26 @@
 
 
 
-<meta name="date" content="2021-03-31" />
+<meta name="date" content="2021-07-11" />
 
 <title>Glaucoma staging study</title>
 
-<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -42,11 +51,6 @@
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -59,32 +63,6 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
 
 
 
@@ -95,10 +73,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -115,40 +89,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -176,7 +123,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -188,7 +135,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -199,10 +146,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -214,7 +174,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -340,7 +299,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -388,7 +347,7 @@ div.tocify {
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="http://aprendeconalf.es/">
-    <span class="fas fa-home fa-lg"></span>
+    <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -397,12 +356,12 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
 <h1 class="title toc-ignore">Glaucoma staging study</h1>
-<h4 class="date">2021-03-31</h4>
+<h4 class="date">2021-07-11</h4>
 
 </div>
 
@@ -517,51 +476,51 @@ div.tocify {
 <h2>Model using all the variables</h2>
 <div id="confusion-matrix-without-healthy-eyes" class="section level3">
 <h3>Confusion matrix without healthy eyes</h3>
-<table style="width:43%;">
+<table style="width:44%;">
 <colgroup>
 <col width="13%" />
 <col width="6%" />
 <col width="6%" />
-<col width="6%" />
+<col width="8%" />
 <col width="8%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th align="left"> </th>
-<th align="right">II</th>
 <th align="right">I</th>
-<th align="right">IV</th>
+<th align="right">II</th>
 <th align="right">III</th>
+<th align="right">IV</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><strong>II</strong></td>
-<td align="right">76</td>
-<td align="right">4</td>
+<td align="left"><strong>I</strong></td>
+<td align="right">47</td>
+<td align="right">2</td>
 <td align="right">0</td>
-<td align="right">3</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
-<td align="left"><strong>I</strong></td>
-<td align="right">2</td>
-<td align="right">47</td>
-<td align="right">0</td>
+<td align="left"><strong>II</strong></td>
+<td align="right">4</td>
+<td align="right">76</td>
+<td align="right">3</td>
 <td align="right">0</td>
 </tr>
 <tr class="odd">
-<td align="left"><strong>IV</strong></td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">37</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
 <td align="left"><strong>III</strong></td>
 <td align="right">0</td>
 <td align="right">0</td>
-<td align="right">4</td>
 <td align="right">50</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>IV</strong></td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">37</td>
 </tr>
 </tbody>
 </table>
@@ -581,51 +540,51 @@ div.tocify {
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center"> </th>
-<th align="center">Sensitivity</th>
-<th align="center">Specificity</th>
-<th align="center">Pos Pred Value</th>
-<th align="center">Neg Pred Value</th>
-<th align="center">Precision</th>
-<th align="center">Recall</th>
+<th align="left"> </th>
+<th align="right">Sensitivity</th>
+<th align="right">Specificity</th>
+<th align="right">Pos Pred Value</th>
+<th align="right">Neg Pred Value</th>
+<th align="right">Precision</th>
+<th align="right">Recall</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>Stage II</strong></td>
-<td align="center">0.9744</td>
-<td align="center">0.9527</td>
-<td align="center">0.9157</td>
-<td align="center">0.986</td>
-<td align="center">0.9157</td>
-<td align="center">0.9744</td>
+<td align="left"><strong>Stage I</strong></td>
+<td align="right">0.9216</td>
+<td align="right">0.9886</td>
+<td align="right">0.9592</td>
+<td align="right">0.9774</td>
+<td align="right">0.9592</td>
+<td align="right">0.9216</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage I</strong></td>
-<td align="center">0.9216</td>
-<td align="center">0.9886</td>
-<td align="center">0.9592</td>
-<td align="center">0.9774</td>
-<td align="center">0.9592</td>
-<td align="center">0.9216</td>
+<td align="left"><strong>Stage II</strong></td>
+<td align="right">0.9744</td>
+<td align="right">0.9527</td>
+<td align="right">0.9157</td>
+<td align="right">0.986</td>
+<td align="right">0.9157</td>
+<td align="right">0.9744</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>Stage IV</strong></td>
-<td align="center">0.9024</td>
-<td align="center">0.9838</td>
-<td align="center">0.925</td>
-<td align="center">0.9785</td>
-<td align="center">0.925</td>
-<td align="center">0.9024</td>
+<td align="left"><strong>Stage III</strong></td>
+<td align="right">0.8929</td>
+<td align="right">0.9765</td>
+<td align="right">0.9259</td>
+<td align="right">0.9651</td>
+<td align="right">0.9259</td>
+<td align="right">0.8929</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage III</strong></td>
-<td align="center">0.8929</td>
-<td align="center">0.9765</td>
-<td align="center">0.9259</td>
-<td align="center">0.9651</td>
-<td align="center">0.9259</td>
-<td align="center">0.8929</td>
+<td align="left"><strong>Stage IV</strong></td>
+<td align="right">0.9024</td>
+<td align="right">0.9838</td>
+<td align="right">0.925</td>
+<td align="right">0.9785</td>
+<td align="right">0.925</td>
+<td align="right">0.9024</td>
 </tr>
 </tbody>
 </table>
@@ -640,111 +599,111 @@ div.tocify {
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center"> </th>
-<th align="center">F1</th>
-<th align="center">Prevalence</th>
-<th align="center">Detection Rate</th>
-<th align="center">Detection Prevalence</th>
-<th align="center">Balanced Accuracy</th>
+<th align="left"> </th>
+<th align="right">F1</th>
+<th align="right">Prevalence</th>
+<th align="right">Detection Rate</th>
+<th align="right">Detection Prevalence</th>
+<th align="right">Balanced Accuracy</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>Stage II</strong></td>
-<td align="center">0.9441</td>
-<td align="center">0.3451</td>
-<td align="center">0.3363</td>
-<td align="center">0.3673</td>
-<td align="center">0.9635</td>
+<td align="left"><strong>Stage I</strong></td>
+<td align="right">0.94</td>
+<td align="right">0.2257</td>
+<td align="right">0.208</td>
+<td align="right">0.2168</td>
+<td align="right">0.9551</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage I</strong></td>
-<td align="center">0.94</td>
-<td align="center">0.2257</td>
-<td align="center">0.208</td>
-<td align="center">0.2168</td>
-<td align="center">0.9551</td>
+<td align="left"><strong>Stage II</strong></td>
+<td align="right">0.9441</td>
+<td align="right">0.3451</td>
+<td align="right">0.3363</td>
+<td align="right">0.3673</td>
+<td align="right">0.9635</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>Stage IV</strong></td>
-<td align="center">0.9136</td>
-<td align="center">0.1814</td>
-<td align="center">0.1637</td>
-<td align="center">0.177</td>
-<td align="center">0.9431</td>
+<td align="left"><strong>Stage III</strong></td>
+<td align="right">0.9091</td>
+<td align="right">0.2478</td>
+<td align="right">0.2212</td>
+<td align="right">0.2389</td>
+<td align="right">0.9347</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage III</strong></td>
-<td align="center">0.9091</td>
-<td align="center">0.2478</td>
-<td align="center">0.2212</td>
-<td align="center">0.2389</td>
-<td align="center">0.9347</td>
+<td align="left"><strong>Stage IV</strong></td>
+<td align="right">0.9136</td>
+<td align="right">0.1814</td>
+<td align="right">0.1637</td>
+<td align="right">0.177</td>
+<td align="right">0.9431</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div id="confusion-matrix-with-healthy-eyes" class="section level3">
 <h3>Confusion matrix with healthy eyes</h3>
-<table style="width:62%;">
+<table style="width:64%;">
 <colgroup>
 <col width="19%" />
 <col width="13%" />
 <col width="6%" />
 <col width="6%" />
-<col width="6%" />
+<col width="8%" />
 <col width="8%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center"> </th>
-<th align="center">Healthy</th>
-<th align="center">II</th>
-<th align="center">I</th>
-<th align="center">IV</th>
-<th align="center">III</th>
+<th align="left"> </th>
+<th align="right">Healthy</th>
+<th align="right">I</th>
+<th align="right">II</th>
+<th align="right">III</th>
+<th align="right">IV</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>Healthy</strong></td>
-<td align="center">747</td>
-<td align="center">36</td>
-<td align="center">42</td>
-<td align="center">0</td>
-<td align="center">0</td>
+<td align="left"><strong>Healthy</strong></td>
+<td align="right">747</td>
+<td align="right">42</td>
+<td align="right">36</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>II</strong></td>
-<td align="center">8</td>
-<td align="center">36</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">8</td>
+<td align="left"><strong>I</strong></td>
+<td align="right">9</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>I</strong></td>
-<td align="center">9</td>
-<td align="center">2</td>
-<td align="center">9</td>
-<td align="center">0</td>
-<td align="center">1</td>
+<td align="left"><strong>II</strong></td>
+<td align="right">8</td>
+<td align="right">0</td>
+<td align="right">36</td>
+<td align="right">8</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>IV</strong></td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">31</td>
-<td align="center">2</td>
+<td align="left"><strong>III</strong></td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">45</td>
+<td align="right">10</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>III</strong></td>
-<td align="center">1</td>
-<td align="center">4</td>
-<td align="center">0</td>
-<td align="center">10</td>
-<td align="center">45</td>
+<td align="left"><strong>IV</strong></td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">31</td>
 </tr>
 </tbody>
 </table>
@@ -764,60 +723,60 @@ div.tocify {
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center"> </th>
-<th align="center">Sensitivity</th>
-<th align="center">Specificity</th>
-<th align="center">Pos Pred Value</th>
-<th align="center">Neg Pred Value</th>
-<th align="center">Precision</th>
-<th align="center">Recall</th>
+<th align="left"> </th>
+<th align="right">Sensitivity</th>
+<th align="right">Specificity</th>
+<th align="right">Pos Pred Value</th>
+<th align="right">Neg Pred Value</th>
+<th align="right">Precision</th>
+<th align="right">Recall</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>Stage Healthy</strong></td>
-<td align="center">0.9765</td>
-<td align="center">0.6549</td>
-<td align="center">0.9055</td>
-<td align="center">0.8916</td>
-<td align="center">0.9055</td>
-<td align="center">0.9765</td>
+<td align="left"><strong>Stage Healthy</strong></td>
+<td align="right">0.9765</td>
+<td align="right">0.6549</td>
+<td align="right">0.9055</td>
+<td align="right">0.8916</td>
+<td align="right">0.9055</td>
+<td align="right">0.9765</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage II</strong></td>
-<td align="center">0.4615</td>
-<td align="center">0.9825</td>
-<td align="center">0.6923</td>
-<td align="center">0.9553</td>
-<td align="center">0.6923</td>
-<td align="center">0.4615</td>
+<td align="left"><strong>Stage I</strong></td>
+<td align="right">0.1765</td>
+<td align="right">0.9872</td>
+<td align="right">0.4286</td>
+<td align="right">0.9567</td>
+<td align="right">0.4286</td>
+<td align="right">0.1765</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>Stage I</strong></td>
-<td align="center">0.1765</td>
-<td align="center">0.9872</td>
-<td align="center">0.4286</td>
-<td align="center">0.9567</td>
-<td align="center">0.4286</td>
-<td align="center">0.1765</td>
+<td align="left"><strong>Stage II</strong></td>
+<td align="right">0.4615</td>
+<td align="right">0.9825</td>
+<td align="right">0.6923</td>
+<td align="right">0.9553</td>
+<td align="right">0.6923</td>
+<td align="right">0.4615</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage IV</strong></td>
-<td align="center">0.7561</td>
-<td align="center">0.9979</td>
-<td align="center">0.9394</td>
-<td align="center">0.9896</td>
-<td align="center">0.9394</td>
-<td align="center">0.7561</td>
+<td align="left"><strong>Stage III</strong></td>
+<td align="right">0.8036</td>
+<td align="right">0.984</td>
+<td align="right">0.75</td>
+<td align="right">0.9882</td>
+<td align="right">0.75</td>
+<td align="right">0.8036</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>Stage III</strong></td>
-<td align="center">0.8036</td>
-<td align="center">0.984</td>
-<td align="center">0.75</td>
-<td align="center">0.9882</td>
-<td align="center">0.75</td>
-<td align="center">0.8036</td>
+<td align="left"><strong>Stage IV</strong></td>
+<td align="right">0.7561</td>
+<td align="right">0.9979</td>
+<td align="right">0.9394</td>
+<td align="right">0.9896</td>
+<td align="right">0.9394</td>
+<td align="right">0.7561</td>
 </tr>
 </tbody>
 </table>
@@ -832,54 +791,54 @@ div.tocify {
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center"> </th>
-<th align="center">F1</th>
-<th align="center">Prevalence</th>
-<th align="center">Detection Rate</th>
-<th align="center">Detection Prevalence</th>
-<th align="center">Balanced Accuracy</th>
+<th align="left"> </th>
+<th align="right">F1</th>
+<th align="right">Prevalence</th>
+<th align="right">Detection Rate</th>
+<th align="right">Detection Prevalence</th>
+<th align="right">Balanced Accuracy</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>Stage Healthy</strong></td>
-<td align="center">0.9396</td>
-<td align="center">0.7719</td>
-<td align="center">0.7538</td>
-<td align="center">0.8325</td>
-<td align="center">0.8157</td>
+<td align="left"><strong>Stage Healthy</strong></td>
+<td align="right">0.9396</td>
+<td align="right">0.7719</td>
+<td align="right">0.7538</td>
+<td align="right">0.8325</td>
+<td align="right">0.8157</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage II</strong></td>
-<td align="center">0.5538</td>
-<td align="center">0.07871</td>
-<td align="center">0.03633</td>
-<td align="center">0.05247</td>
-<td align="center">0.722</td>
+<td align="left"><strong>Stage I</strong></td>
+<td align="right">0.25</td>
+<td align="right">0.05146</td>
+<td align="right">0.009082</td>
+<td align="right">0.02119</td>
+<td align="right">0.5819</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>Stage I</strong></td>
-<td align="center">0.25</td>
-<td align="center">0.05146</td>
-<td align="center">0.009082</td>
-<td align="center">0.02119</td>
-<td align="center">0.5819</td>
+<td align="left"><strong>Stage II</strong></td>
+<td align="right">0.5538</td>
+<td align="right">0.07871</td>
+<td align="right">0.03633</td>
+<td align="right">0.05247</td>
+<td align="right">0.722</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage IV</strong></td>
-<td align="center">0.8378</td>
-<td align="center">0.04137</td>
-<td align="center">0.03128</td>
-<td align="center">0.0333</td>
-<td align="center">0.877</td>
+<td align="left"><strong>Stage III</strong></td>
+<td align="right">0.7759</td>
+<td align="right">0.05651</td>
+<td align="right">0.04541</td>
+<td align="right">0.06054</td>
+<td align="right">0.8938</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>Stage III</strong></td>
-<td align="center">0.7759</td>
-<td align="center">0.05651</td>
-<td align="center">0.04541</td>
-<td align="center">0.06054</td>
-<td align="center">0.8938</td>
+<td align="left"><strong>Stage IV</strong></td>
+<td align="right">0.8378</td>
+<td align="right">0.04137</td>
+<td align="right">0.03128</td>
+<td align="right">0.0333</td>
+<td align="right">0.877</td>
 </tr>
 </tbody>
 </table>
@@ -889,51 +848,51 @@ div.tocify {
 <h2>Model using sectors G BMO and all the RNFL and sector TI of RNFL</h2>
 <div id="confusion-matrix-without-healthy-eyes-1" class="section level3">
 <h3>Confusion matrix without healthy eyes</h3>
-<table style="width:43%;">
+<table style="width:44%;">
 <colgroup>
 <col width="13%" />
 <col width="6%" />
 <col width="6%" />
-<col width="6%" />
+<col width="8%" />
 <col width="8%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center"> </th>
-<th align="center">II</th>
-<th align="center">I</th>
-<th align="center">IV</th>
-<th align="center">III</th>
+<th align="left"> </th>
+<th align="right">I</th>
+<th align="right">II</th>
+<th align="right">III</th>
+<th align="right">IV</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>II</strong></td>
-<td align="center">75</td>
-<td align="center">4</td>
-<td align="center">0</td>
-<td align="center">2</td>
+<td align="left"><strong>I</strong></td>
+<td align="right">47</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>I</strong></td>
-<td align="center">0</td>
-<td align="center">47</td>
-<td align="center">0</td>
-<td align="center">0</td>
+<td align="left"><strong>II</strong></td>
+<td align="right">4</td>
+<td align="right">75</td>
+<td align="right">2</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>IV</strong></td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">37</td>
-<td align="center">0</td>
+<td align="left"><strong>III</strong></td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">54</td>
+<td align="right">4</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>III</strong></td>
-<td align="center">3</td>
-<td align="center">0</td>
-<td align="center">4</td>
-<td align="center">54</td>
+<td align="left"><strong>IV</strong></td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">37</td>
 </tr>
 </tbody>
 </table>
@@ -953,51 +912,51 @@ div.tocify {
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center"> </th>
-<th align="center">Sensitivity</th>
-<th align="center">Specificity</th>
-<th align="center">Pos Pred Value</th>
-<th align="center">Neg Pred Value</th>
-<th align="center">Precision</th>
-<th align="center">Recall</th>
+<th align="left"> </th>
+<th align="right">Sensitivity</th>
+<th align="right">Specificity</th>
+<th align="right">Pos Pred Value</th>
+<th align="right">Neg Pred Value</th>
+<th align="right">Precision</th>
+<th align="right">Recall</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>Stage II</strong></td>
-<td align="center">0.9615</td>
-<td align="center">0.9595</td>
-<td align="center">0.9259</td>
-<td align="center">0.9793</td>
-<td align="center">0.9259</td>
-<td align="center">0.9615</td>
+<td align="left"><strong>Stage I</strong></td>
+<td align="right">0.9216</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0.9777</td>
+<td align="right">1</td>
+<td align="right">0.9216</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage I</strong></td>
-<td align="center">0.9216</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">0.9777</td>
-<td align="center">1</td>
-<td align="center">0.9216</td>
+<td align="left"><strong>Stage II</strong></td>
+<td align="right">0.9615</td>
+<td align="right">0.9595</td>
+<td align="right">0.9259</td>
+<td align="right">0.9793</td>
+<td align="right">0.9259</td>
+<td align="right">0.9615</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>Stage IV</strong></td>
-<td align="center">0.9024</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">0.9788</td>
-<td align="center">1</td>
-<td align="center">0.9024</td>
+<td align="left"><strong>Stage III</strong></td>
+<td align="right">0.9643</td>
+<td align="right">0.9588</td>
+<td align="right">0.8852</td>
+<td align="right">0.9879</td>
+<td align="right">0.8852</td>
+<td align="right">0.9643</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage III</strong></td>
-<td align="center">0.9643</td>
-<td align="center">0.9588</td>
-<td align="center">0.8852</td>
-<td align="center">0.9879</td>
-<td align="center">0.8852</td>
-<td align="center">0.9643</td>
+<td align="left"><strong>Stage IV</strong></td>
+<td align="right">0.9024</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0.9788</td>
+<td align="right">1</td>
+<td align="right">0.9024</td>
 </tr>
 </tbody>
 </table>
@@ -1012,111 +971,111 @@ div.tocify {
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center"> </th>
-<th align="center">F1</th>
-<th align="center">Prevalence</th>
-<th align="center">Detection Rate</th>
-<th align="center">Detection Prevalence</th>
-<th align="center">Balanced Accuracy</th>
+<th align="left"> </th>
+<th align="right">F1</th>
+<th align="right">Prevalence</th>
+<th align="right">Detection Rate</th>
+<th align="right">Detection Prevalence</th>
+<th align="right">Balanced Accuracy</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>Stage II</strong></td>
-<td align="center">0.9434</td>
-<td align="center">0.3451</td>
-<td align="center">0.3319</td>
-<td align="center">0.3584</td>
-<td align="center">0.9605</td>
+<td align="left"><strong>Stage I</strong></td>
+<td align="right">0.9592</td>
+<td align="right">0.2257</td>
+<td align="right">0.208</td>
+<td align="right">0.208</td>
+<td align="right">0.9608</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage I</strong></td>
-<td align="center">0.9592</td>
-<td align="center">0.2257</td>
-<td align="center">0.208</td>
-<td align="center">0.208</td>
-<td align="center">0.9608</td>
+<td align="left"><strong>Stage II</strong></td>
+<td align="right">0.9434</td>
+<td align="right">0.3451</td>
+<td align="right">0.3319</td>
+<td align="right">0.3584</td>
+<td align="right">0.9605</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>Stage IV</strong></td>
-<td align="center">0.9487</td>
-<td align="center">0.1814</td>
-<td align="center">0.1637</td>
-<td align="center">0.1637</td>
-<td align="center">0.9512</td>
+<td align="left"><strong>Stage III</strong></td>
+<td align="right">0.9231</td>
+<td align="right">0.2478</td>
+<td align="right">0.2389</td>
+<td align="right">0.2699</td>
+<td align="right">0.9616</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage III</strong></td>
-<td align="center">0.9231</td>
-<td align="center">0.2478</td>
-<td align="center">0.2389</td>
-<td align="center">0.2699</td>
-<td align="center">0.9616</td>
+<td align="left"><strong>Stage IV</strong></td>
+<td align="right">0.9487</td>
+<td align="right">0.1814</td>
+<td align="right">0.1637</td>
+<td align="right">0.1637</td>
+<td align="right">0.9512</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div id="confusion-matrix-with-healthy-eyes-1" class="section level3">
 <h3>Confusion matrix with healthy eyes</h3>
-<table style="width:62%;">
+<table style="width:64%;">
 <colgroup>
 <col width="19%" />
 <col width="13%" />
 <col width="6%" />
 <col width="6%" />
-<col width="6%" />
+<col width="8%" />
 <col width="8%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center"> </th>
-<th align="center">Healthy</th>
-<th align="center">II</th>
-<th align="center">I</th>
-<th align="center">IV</th>
-<th align="center">III</th>
+<th align="left"> </th>
+<th align="right">Healthy</th>
+<th align="right">I</th>
+<th align="right">II</th>
+<th align="right">III</th>
+<th align="right">IV</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>Healthy</strong></td>
-<td align="center">754</td>
-<td align="center">35</td>
-<td align="center">49</td>
-<td align="center">0</td>
-<td align="center">2</td>
+<td align="left"><strong>Healthy</strong></td>
+<td align="right">754</td>
+<td align="right">49</td>
+<td align="right">35</td>
+<td align="right">2</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>II</strong></td>
-<td align="center">6</td>
-<td align="center">40</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">4</td>
+<td align="left"><strong>I</strong></td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>I</strong></td>
-<td align="center">4</td>
-<td align="center">0</td>
-<td align="center">2</td>
-<td align="center">0</td>
-<td align="center">0</td>
+<td align="left"><strong>II</strong></td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">40</td>
+<td align="right">4</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>IV</strong></td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">35</td>
-<td align="center">1</td>
+<td align="left"><strong>III</strong></td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">49</td>
+<td align="right">6</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>III</strong></td>
-<td align="center">1</td>
-<td align="center">3</td>
-<td align="center">0</td>
-<td align="center">6</td>
-<td align="center">49</td>
+<td align="left"><strong>IV</strong></td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">35</td>
 </tr>
 </tbody>
 </table>
@@ -1136,60 +1095,60 @@ div.tocify {
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center"> </th>
-<th align="center">Sensitivity</th>
-<th align="center">Specificity</th>
-<th align="center">Pos Pred Value</th>
-<th align="center">Neg Pred Value</th>
-<th align="center">Precision</th>
-<th align="center">Recall</th>
+<th align="left"> </th>
+<th align="right">Sensitivity</th>
+<th align="right">Specificity</th>
+<th align="right">Pos Pred Value</th>
+<th align="right">Neg Pred Value</th>
+<th align="right">Precision</th>
+<th align="right">Recall</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>Stage Healthy</strong></td>
-<td align="center">0.9856</td>
-<td align="center">0.6195</td>
-<td align="center">0.8976</td>
-<td align="center">0.9272</td>
-<td align="center">0.8976</td>
-<td align="center">0.9856</td>
+<td align="left"><strong>Stage Healthy</strong></td>
+<td align="right">0.9856</td>
+<td align="right">0.6195</td>
+<td align="right">0.8976</td>
+<td align="right">0.9272</td>
+<td align="right">0.8976</td>
+<td align="right">0.9856</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage II</strong></td>
-<td align="center">0.5128</td>
-<td align="center">0.989</td>
-<td align="center">0.8</td>
-<td align="center">0.9596</td>
-<td align="center">0.8</td>
-<td align="center">0.5128</td>
+<td align="left"><strong>Stage I</strong></td>
+<td align="right">0.03922</td>
+<td align="right">0.9957</td>
+<td align="right">0.3333</td>
+<td align="right">0.9503</td>
+<td align="right">0.3333</td>
+<td align="right">0.03922</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>Stage I</strong></td>
-<td align="center">0.03922</td>
-<td align="center">0.9957</td>
-<td align="center">0.3333</td>
-<td align="center">0.9503</td>
-<td align="center">0.3333</td>
-<td align="center">0.03922</td>
+<td align="left"><strong>Stage II</strong></td>
+<td align="right">0.5128</td>
+<td align="right">0.989</td>
+<td align="right">0.8</td>
+<td align="right">0.9596</td>
+<td align="right">0.8</td>
+<td align="right">0.5128</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage IV</strong></td>
-<td align="center">0.8537</td>
-<td align="center">0.9989</td>
-<td align="center">0.9722</td>
-<td align="center">0.9937</td>
-<td align="center">0.9722</td>
-<td align="center">0.8537</td>
+<td align="left"><strong>Stage III</strong></td>
+<td align="right">0.875</td>
+<td align="right">0.9893</td>
+<td align="right">0.8305</td>
+<td align="right">0.9925</td>
+<td align="right">0.8305</td>
+<td align="right">0.875</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>Stage III</strong></td>
-<td align="center">0.875</td>
-<td align="center">0.9893</td>
-<td align="center">0.8305</td>
-<td align="center">0.9925</td>
-<td align="center">0.8305</td>
-<td align="center">0.875</td>
+<td align="left"><strong>Stage IV</strong></td>
+<td align="right">0.8537</td>
+<td align="right">0.9989</td>
+<td align="right">0.9722</td>
+<td align="right">0.9937</td>
+<td align="right">0.9722</td>
+<td align="right">0.8537</td>
 </tr>
 </tbody>
 </table>
@@ -1204,54 +1163,54 @@ div.tocify {
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center"> </th>
-<th align="center">F1</th>
-<th align="center">Prevalence</th>
-<th align="center">Detection Rate</th>
-<th align="center">Detection Prevalence</th>
-<th align="center">Balanced Accuracy</th>
+<th align="left"> </th>
+<th align="right">F1</th>
+<th align="right">Prevalence</th>
+<th align="right">Detection Rate</th>
+<th align="right">Detection Prevalence</th>
+<th align="right">Balanced Accuracy</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>Stage Healthy</strong></td>
-<td align="center">0.9396</td>
-<td align="center">0.7719</td>
-<td align="center">0.7608</td>
-<td align="center">0.8476</td>
-<td align="center">0.8025</td>
+<td align="left"><strong>Stage Healthy</strong></td>
+<td align="right">0.9396</td>
+<td align="right">0.7719</td>
+<td align="right">0.7608</td>
+<td align="right">0.8476</td>
+<td align="right">0.8025</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage II</strong></td>
-<td align="center">0.625</td>
-<td align="center">0.07871</td>
-<td align="center">0.04036</td>
-<td align="center">0.05045</td>
-<td align="center">0.7509</td>
+<td align="left"><strong>Stage I</strong></td>
+<td align="right">0.07018</td>
+<td align="right">0.05146</td>
+<td align="right">0.002018</td>
+<td align="right">0.006054</td>
+<td align="right">0.5175</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>Stage I</strong></td>
-<td align="center">0.07018</td>
-<td align="center">0.05146</td>
-<td align="center">0.002018</td>
-<td align="center">0.006054</td>
-<td align="center">0.5175</td>
+<td align="left"><strong>Stage II</strong></td>
+<td align="right">0.625</td>
+<td align="right">0.07871</td>
+<td align="right">0.04036</td>
+<td align="right">0.05045</td>
+<td align="right">0.7509</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage IV</strong></td>
-<td align="center">0.9091</td>
-<td align="center">0.04137</td>
-<td align="center">0.03532</td>
-<td align="center">0.03633</td>
-<td align="center">0.9263</td>
+<td align="left"><strong>Stage III</strong></td>
+<td align="right">0.8522</td>
+<td align="right">0.05651</td>
+<td align="right">0.04945</td>
+<td align="right">0.05954</td>
+<td align="right">0.9322</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>Stage III</strong></td>
-<td align="center">0.8522</td>
-<td align="center">0.05651</td>
-<td align="center">0.04945</td>
-<td align="center">0.05954</td>
-<td align="center">0.9322</td>
+<td align="left"><strong>Stage IV</strong></td>
+<td align="right">0.9091</td>
+<td align="right">0.04137</td>
+<td align="right">0.03532</td>
+<td align="right">0.03633</td>
+<td align="right">0.9263</td>
 </tr>
 </tbody>
 </table>
@@ -1262,96 +1221,96 @@ div.tocify {
 <div id="discriminant-functions-without-healthy-eyes" class="section level3">
 <h3>Discriminant functions without healthy eyes</h3>
 <p>Coefficients of the linear discriminant functions:</p>
-<table style="width:67%;">
+<table style="width:65%;">
 <colgroup>
 <col width="23%" />
 <col width="13%" />
 <col width="13%" />
-<col width="15%" />
+<col width="13%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center"> </th>
-<th align="center">LD1</th>
-<th align="center">LD2</th>
-<th align="center">LD3</th>
+<th align="left"> </th>
+<th align="right">LD1</th>
+<th align="right">LD2</th>
+<th align="right">LD3</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>BMO.G</strong></td>
-<td align="center">-0.1881</td>
-<td align="center">-0.7502</td>
-<td align="center">0.9165</td>
+<td align="left"><strong>BMO.G</strong></td>
+<td align="right">-0.1881</td>
+<td align="right">0.7502</td>
+<td align="right">-0.9165</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>BMO.TI</strong></td>
-<td align="center">-0.0943</td>
-<td align="center">0.2901</td>
-<td align="center">-1.566</td>
+<td align="left"><strong>BMO.TI</strong></td>
+<td align="right">-0.0943</td>
+<td align="right">-0.2901</td>
+<td align="right">1.566</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>RNFL3.5.G</strong></td>
-<td align="center">-0.8857</td>
-<td align="center">-0.481</td>
-<td align="center">-0.08495</td>
+<td align="left"><strong>RNFL3.5.G</strong></td>
+<td align="right">-0.8857</td>
+<td align="right">0.481</td>
+<td align="right">0.08495</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>RNFL3.5.TI</strong></td>
-<td align="center">-0.4108</td>
-<td align="center">0.6927</td>
-<td align="center">0.5217</td>
+<td align="left"><strong>RNFL3.5.TI</strong></td>
+<td align="right">-0.4108</td>
+<td align="right">-0.6927</td>
+<td align="right">-0.5217</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div id="confusion-matrix-without-healthy-eyes-2" class="section level3">
 <h3>Confusion matrix without healthy eyes</h3>
-<table style="width:43%;">
+<table style="width:44%;">
 <colgroup>
 <col width="13%" />
 <col width="6%" />
 <col width="6%" />
-<col width="6%" />
+<col width="8%" />
 <col width="8%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center"> </th>
-<th align="center">II</th>
-<th align="center">I</th>
-<th align="center">IV</th>
-<th align="center">III</th>
+<th align="left"> </th>
+<th align="right">I</th>
+<th align="right">II</th>
+<th align="right">III</th>
+<th align="right">IV</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>II</strong></td>
-<td align="center">75</td>
-<td align="center">6</td>
-<td align="center">0</td>
-<td align="center">4</td>
+<td align="left"><strong>I</strong></td>
+<td align="right">45</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>I</strong></td>
-<td align="center">0</td>
-<td align="center">45</td>
-<td align="center">0</td>
-<td align="center">0</td>
+<td align="left"><strong>II</strong></td>
+<td align="right">6</td>
+<td align="right">75</td>
+<td align="right">4</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>IV</strong></td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">38</td>
-<td align="center">2</td>
+<td align="left"><strong>III</strong></td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">50</td>
+<td align="right">3</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>III</strong></td>
-<td align="center">3</td>
-<td align="center">0</td>
-<td align="center">3</td>
-<td align="center">50</td>
+<td align="left"><strong>IV</strong></td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">38</td>
 </tr>
 </tbody>
 </table>
@@ -1371,51 +1330,51 @@ div.tocify {
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center"> </th>
-<th align="center">Sensitivity</th>
-<th align="center">Specificity</th>
-<th align="center">Pos Pred Value</th>
-<th align="center">Neg Pred Value</th>
-<th align="center">Precision</th>
-<th align="center">Recall</th>
+<th align="left"> </th>
+<th align="right">Sensitivity</th>
+<th align="right">Specificity</th>
+<th align="right">Pos Pred Value</th>
+<th align="right">Neg Pred Value</th>
+<th align="right">Precision</th>
+<th align="right">Recall</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>Stage II</strong></td>
-<td align="center">0.9615</td>
-<td align="center">0.9324</td>
-<td align="center">0.8824</td>
-<td align="center">0.9787</td>
-<td align="center">0.8824</td>
-<td align="center">0.9615</td>
+<td align="left"><strong>Stage I</strong></td>
+<td align="right">0.8824</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0.9669</td>
+<td align="right">1</td>
+<td align="right">0.8824</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage I</strong></td>
-<td align="center">0.8824</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">0.9669</td>
-<td align="center">1</td>
-<td align="center">0.8824</td>
+<td align="left"><strong>Stage II</strong></td>
+<td align="right">0.9615</td>
+<td align="right">0.9324</td>
+<td align="right">0.8824</td>
+<td align="right">0.9787</td>
+<td align="right">0.8824</td>
+<td align="right">0.9615</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>Stage IV</strong></td>
-<td align="center">0.9268</td>
-<td align="center">0.9892</td>
-<td align="center">0.95</td>
-<td align="center">0.9839</td>
-<td align="center">0.95</td>
-<td align="center">0.9268</td>
+<td align="left"><strong>Stage III</strong></td>
+<td align="right">0.8929</td>
+<td align="right">0.9647</td>
+<td align="right">0.8929</td>
+<td align="right">0.9647</td>
+<td align="right">0.8929</td>
+<td align="right">0.8929</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage III</strong></td>
-<td align="center">0.8929</td>
-<td align="center">0.9647</td>
-<td align="center">0.8929</td>
-<td align="center">0.9647</td>
-<td align="center">0.8929</td>
-<td align="center">0.8929</td>
+<td align="left"><strong>Stage IV</strong></td>
+<td align="right">0.9268</td>
+<td align="right">0.9892</td>
+<td align="right">0.95</td>
+<td align="right">0.9839</td>
+<td align="right">0.95</td>
+<td align="right">0.9268</td>
 </tr>
 </tbody>
 </table>
@@ -1430,46 +1389,46 @@ div.tocify {
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center"> </th>
-<th align="center">F1</th>
-<th align="center">Prevalence</th>
-<th align="center">Detection Rate</th>
-<th align="center">Detection Prevalence</th>
-<th align="center">Balanced Accuracy</th>
+<th align="left"> </th>
+<th align="right">F1</th>
+<th align="right">Prevalence</th>
+<th align="right">Detection Rate</th>
+<th align="right">Detection Prevalence</th>
+<th align="right">Balanced Accuracy</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>Stage II</strong></td>
-<td align="center">0.9202</td>
-<td align="center">0.3451</td>
-<td align="center">0.3319</td>
-<td align="center">0.3761</td>
-<td align="center">0.947</td>
+<td align="left"><strong>Stage I</strong></td>
+<td align="right">0.9375</td>
+<td align="right">0.2257</td>
+<td align="right">0.1991</td>
+<td align="right">0.1991</td>
+<td align="right">0.9412</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage I</strong></td>
-<td align="center">0.9375</td>
-<td align="center">0.2257</td>
-<td align="center">0.1991</td>
-<td align="center">0.1991</td>
-<td align="center">0.9412</td>
+<td align="left"><strong>Stage II</strong></td>
+<td align="right">0.9202</td>
+<td align="right">0.3451</td>
+<td align="right">0.3319</td>
+<td align="right">0.3761</td>
+<td align="right">0.947</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>Stage IV</strong></td>
-<td align="center">0.9383</td>
-<td align="center">0.1814</td>
-<td align="center">0.1681</td>
-<td align="center">0.177</td>
-<td align="center">0.958</td>
+<td align="left"><strong>Stage III</strong></td>
+<td align="right">0.8929</td>
+<td align="right">0.2478</td>
+<td align="right">0.2212</td>
+<td align="right">0.2478</td>
+<td align="right">0.9288</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage III</strong></td>
-<td align="center">0.8929</td>
-<td align="center">0.2478</td>
-<td align="center">0.2212</td>
-<td align="center">0.2478</td>
-<td align="center">0.9288</td>
+<td align="left"><strong>Stage IV</strong></td>
+<td align="right">0.9383</td>
+<td align="right">0.1814</td>
+<td align="right">0.1681</td>
+<td align="right">0.177</td>
+<td align="right">0.958</td>
 </tr>
 </tbody>
 </table>
@@ -1477,116 +1436,116 @@ div.tocify {
 <div id="discriminant-functions-with-healthy-eyes" class="section level3">
 <h3>Discriminant functions with healthy eyes</h3>
 <p>Coefficients of the linear discriminant functions:</p>
-<table style="width:78%;">
+<table style="width:79%;">
 <colgroup>
 <col width="23%" />
 <col width="13%" />
 <col width="13%" />
-<col width="12%" />
+<col width="13%" />
 <col width="13%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center"> </th>
-<th align="center">LD1</th>
-<th align="center">LD2</th>
-<th align="center">LD3</th>
-<th align="center">LD4</th>
+<th align="left"> </th>
+<th align="right">LD1</th>
+<th align="right">LD2</th>
+<th align="right">LD3</th>
+<th align="right">LD4</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>BMO.G</strong></td>
-<td align="center">-0.2069</td>
-<td align="center">1.224</td>
-<td align="center">0.2007</td>
-<td align="center">1.199</td>
+<td align="left"><strong>BMO.G</strong></td>
+<td align="right">-0.2069</td>
+<td align="right">1.224</td>
+<td align="right">-0.2007</td>
+<td align="right">-1.199</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>BMO.TI</strong></td>
-<td align="center">-0.1555</td>
-<td align="center">-0.4096</td>
-<td align="center">0.2255</td>
-<td align="center">-1.738</td>
+<td align="left"><strong>BMO.TI</strong></td>
+<td align="right">-0.1555</td>
+<td align="right">-0.4096</td>
+<td align="right">-0.2255</td>
+<td align="right">1.738</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>RNFL3.5.G</strong></td>
-<td align="center">-0.6034</td>
-<td align="center">-0.1298</td>
-<td align="center">-1.072</td>
-<td align="center">-0.2322</td>
+<td align="left"><strong>RNFL3.5.G</strong></td>
+<td align="right">-0.6034</td>
+<td align="right">-0.1298</td>
+<td align="right">1.072</td>
+<td align="right">0.2322</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>RNFL3.5.TI</strong></td>
-<td align="center">-0.295</td>
-<td align="center">-0.4165</td>
-<td align="center">0.8337</td>
-<td align="center">0.639</td>
+<td align="left"><strong>RNFL3.5.TI</strong></td>
+<td align="right">-0.295</td>
+<td align="right">-0.4165</td>
+<td align="right">-0.8337</td>
+<td align="right">-0.639</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div id="confusion-matrix-with-healthy-eyes-2" class="section level3">
 <h3>Confusion matrix with healthy eyes</h3>
-<table style="width:62%;">
+<table style="width:64%;">
 <colgroup>
 <col width="19%" />
 <col width="13%" />
 <col width="6%" />
 <col width="6%" />
-<col width="6%" />
+<col width="8%" />
 <col width="8%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center"> </th>
-<th align="center">Healthy</th>
-<th align="center">II</th>
-<th align="center">I</th>
-<th align="center">IV</th>
-<th align="center">III</th>
+<th align="left"> </th>
+<th align="right">Healthy</th>
+<th align="right">I</th>
+<th align="right">II</th>
+<th align="right">III</th>
+<th align="right">IV</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>Healthy</strong></td>
-<td align="center">755</td>
-<td align="center">38</td>
-<td align="center">50</td>
-<td align="center">0</td>
-<td align="center">2</td>
+<td align="left"><strong>Healthy</strong></td>
+<td align="right">755</td>
+<td align="right">50</td>
+<td align="right">38</td>
+<td align="right">2</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>II</strong></td>
-<td align="center">7</td>
-<td align="center">37</td>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">7</td>
+<td align="left"><strong>I</strong></td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>I</strong></td>
-<td align="center">2</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
+<td align="left"><strong>II</strong></td>
+<td align="right">7</td>
+<td align="right">1</td>
+<td align="right">37</td>
+<td align="right">7</td>
+<td align="right">0</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>IV</strong></td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">37</td>
-<td align="center">1</td>
+<td align="left"><strong>III</strong></td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">46</td>
+<td align="right">4</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>III</strong></td>
-<td align="center">1</td>
-<td align="center">3</td>
-<td align="center">0</td>
-<td align="center">4</td>
-<td align="center">46</td>
+<td align="left"><strong>IV</strong></td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">37</td>
 </tr>
 </tbody>
 </table>
@@ -1606,60 +1565,60 @@ div.tocify {
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center"> </th>
-<th align="center">Sensitivity</th>
-<th align="center">Specificity</th>
-<th align="center">Pos Pred Value</th>
-<th align="center">Neg Pred Value</th>
-<th align="center">Precision</th>
-<th align="center">Recall</th>
+<th align="left"> </th>
+<th align="right">Sensitivity</th>
+<th align="right">Specificity</th>
+<th align="right">Pos Pred Value</th>
+<th align="right">Neg Pred Value</th>
+<th align="right">Precision</th>
+<th align="right">Recall</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>Stage Healthy</strong></td>
-<td align="center">0.9869</td>
-<td align="center">0.6018</td>
-<td align="center">0.8935</td>
-<td align="center">0.9315</td>
-<td align="center">0.8935</td>
-<td align="center">0.9869</td>
+<td align="left"><strong>Stage Healthy</strong></td>
+<td align="right">0.9869</td>
+<td align="right">0.6018</td>
+<td align="right">0.8935</td>
+<td align="right">0.9315</td>
+<td align="right">0.8935</td>
+<td align="right">0.9869</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage II</strong></td>
-<td align="center">0.4744</td>
-<td align="center">0.9836</td>
-<td align="center">0.7115</td>
-<td align="center">0.9563</td>
-<td align="center">0.7115</td>
-<td align="center">0.4744</td>
+<td align="left"><strong>Stage I</strong></td>
+<td align="right">0</td>
+<td align="right">0.9979</td>
+<td align="right">0</td>
+<td align="right">0.9484</td>
+<td align="right">0</td>
+<td align="right">0</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>Stage I</strong></td>
-<td align="center">0</td>
-<td align="center">0.9979</td>
-<td align="center">0</td>
-<td align="center">0.9484</td>
-<td align="center">0</td>
-<td align="center">0</td>
+<td align="left"><strong>Stage II</strong></td>
+<td align="right">0.4744</td>
+<td align="right">0.9836</td>
+<td align="right">0.7115</td>
+<td align="right">0.9563</td>
+<td align="right">0.7115</td>
+<td align="right">0.4744</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage IV</strong></td>
-<td align="center">0.9024</td>
-<td align="center">0.9989</td>
-<td align="center">0.9737</td>
-<td align="center">0.9958</td>
-<td align="center">0.9737</td>
-<td align="center">0.9024</td>
+<td align="left"><strong>Stage III</strong></td>
+<td align="right">0.8214</td>
+<td align="right">0.9914</td>
+<td align="right">0.8519</td>
+<td align="right">0.9893</td>
+<td align="right">0.8519</td>
+<td align="right">0.8214</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>Stage III</strong></td>
-<td align="center">0.8214</td>
-<td align="center">0.9914</td>
-<td align="center">0.8519</td>
-<td align="center">0.9893</td>
-<td align="center">0.8519</td>
-<td align="center">0.8214</td>
+<td align="left"><strong>Stage IV</strong></td>
+<td align="right">0.9024</td>
+<td align="right">0.9989</td>
+<td align="right">0.9737</td>
+<td align="right">0.9958</td>
+<td align="right">0.9737</td>
+<td align="right">0.9024</td>
 </tr>
 </tbody>
 </table>
@@ -1674,54 +1633,54 @@ div.tocify {
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center"> </th>
-<th align="center">F1</th>
-<th align="center">Prevalence</th>
-<th align="center">Detection Rate</th>
-<th align="center">Detection Prevalence</th>
-<th align="center">Balanced Accuracy</th>
+<th align="left"> </th>
+<th align="right">F1</th>
+<th align="right">Prevalence</th>
+<th align="right">Detection Rate</th>
+<th align="right">Detection Prevalence</th>
+<th align="right">Balanced Accuracy</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>Stage Healthy</strong></td>
-<td align="center">0.9379</td>
-<td align="center">0.7719</td>
-<td align="center">0.7619</td>
-<td align="center">0.8527</td>
-<td align="center">0.7943</td>
+<td align="left"><strong>Stage Healthy</strong></td>
+<td align="right">0.9379</td>
+<td align="right">0.7719</td>
+<td align="right">0.7619</td>
+<td align="right">0.8527</td>
+<td align="right">0.7943</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage II</strong></td>
-<td align="center">0.5692</td>
-<td align="center">0.07871</td>
-<td align="center">0.03734</td>
-<td align="center">0.05247</td>
-<td align="center">0.729</td>
+<td align="left"><strong>Stage I</strong></td>
+<td align="right">NA</td>
+<td align="right">0.05146</td>
+<td align="right">0</td>
+<td align="right">0.002018</td>
+<td align="right">0.4989</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>Stage I</strong></td>
-<td align="center">NA</td>
-<td align="center">0.05146</td>
-<td align="center">0</td>
-<td align="center">0.002018</td>
-<td align="center">0.4989</td>
+<td align="left"><strong>Stage II</strong></td>
+<td align="right">0.5692</td>
+<td align="right">0.07871</td>
+<td align="right">0.03734</td>
+<td align="right">0.05247</td>
+<td align="right">0.729</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Stage IV</strong></td>
-<td align="center">0.9367</td>
-<td align="center">0.04137</td>
-<td align="center">0.03734</td>
-<td align="center">0.03835</td>
-<td align="center">0.9507</td>
+<td align="left"><strong>Stage III</strong></td>
+<td align="right">0.8364</td>
+<td align="right">0.05651</td>
+<td align="right">0.04642</td>
+<td align="right">0.05449</td>
+<td align="right">0.9064</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>Stage III</strong></td>
-<td align="center">0.8364</td>
-<td align="center">0.05651</td>
-<td align="center">0.04642</td>
-<td align="center">0.05449</td>
-<td align="center">0.9064</td>
+<td align="left"><strong>Stage IV</strong></td>
+<td align="right">0.9367</td>
+<td align="right">0.04137</td>
+<td align="right">0.03734</td>
+<td align="right">0.03835</td>
+<td align="right">0.9507</td>
 </tr>
 </tbody>
 </table>
@@ -1741,216 +1700,216 @@ div.tocify {
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center">Sector</th>
-<th align="center">Stage</th>
-<th align="center">n</th>
-<th align="center">mean</th>
-<th align="center">sd</th>
-<th align="center">se</th>
-<th align="center">lower.ci</th>
-<th align="center">upper.ci</th>
+<th align="right">Sector</th>
+<th align="right">Stage</th>
+<th align="right">n</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">se</th>
+<th align="right">lower.ci</th>
+<th align="right">upper.ci</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">BMO.G</td>
-<td align="center">Healthy</td>
-<td align="center">765</td>
-<td align="center">0.34</td>
-<td align="center">1.037</td>
-<td align="center">0.0375</td>
-<td align="center">0.2664</td>
-<td align="center">0.4136</td>
+<td align="right">BMO.G</td>
+<td align="right">Healthy</td>
+<td align="right">765</td>
+<td align="right">0.34</td>
+<td align="right">1.037</td>
+<td align="right">0.0375</td>
+<td align="right">0.2664</td>
+<td align="right">0.4136</td>
 </tr>
 <tr class="even">
-<td align="center">BMO.G</td>
-<td align="center">II</td>
-<td align="center">78</td>
-<td align="center">-1.472</td>
-<td align="center">0.8091</td>
-<td align="center">0.09162</td>
-<td align="center">-1.654</td>
-<td align="center">-1.289</td>
+<td align="right">BMO.G</td>
+<td align="right">I</td>
+<td align="right">51</td>
+<td align="right">-0.3516</td>
+<td align="right">0.9794</td>
+<td align="right">0.1372</td>
+<td align="right">-0.6271</td>
+<td align="right">-0.07616</td>
 </tr>
 <tr class="odd">
-<td align="center">BMO.G</td>
-<td align="center">I</td>
-<td align="center">51</td>
-<td align="center">-0.3516</td>
-<td align="center">0.9794</td>
-<td align="center">0.1372</td>
-<td align="center">-0.6271</td>
-<td align="center">-0.07616</td>
+<td align="right">BMO.G</td>
+<td align="right">II</td>
+<td align="right">78</td>
+<td align="right">-1.472</td>
+<td align="right">0.8091</td>
+<td align="right">0.09162</td>
+<td align="right">-1.654</td>
+<td align="right">-1.289</td>
 </tr>
 <tr class="even">
-<td align="center">BMO.G</td>
-<td align="center">IV</td>
-<td align="center">41</td>
-<td align="center">-3.188</td>
-<td align="center">0.8738</td>
-<td align="center">0.1365</td>
-<td align="center">-3.464</td>
-<td align="center">-2.912</td>
+<td align="right">BMO.G</td>
+<td align="right">III</td>
+<td align="right">56</td>
+<td align="right">-1.976</td>
+<td align="right">0.8783</td>
+<td align="right">0.1174</td>
+<td align="right">-2.211</td>
+<td align="right">-1.74</td>
 </tr>
 <tr class="odd">
-<td align="center">BMO.G</td>
-<td align="center">III</td>
-<td align="center">56</td>
-<td align="center">-1.976</td>
-<td align="center">0.8783</td>
-<td align="center">0.1174</td>
-<td align="center">-2.211</td>
-<td align="center">-1.74</td>
+<td align="right">BMO.G</td>
+<td align="right">IV</td>
+<td align="right">41</td>
+<td align="right">-3.188</td>
+<td align="right">0.8738</td>
+<td align="right">0.1365</td>
+<td align="right">-3.464</td>
+<td align="right">-2.912</td>
 </tr>
 <tr class="even">
-<td align="center">BMO.TI</td>
-<td align="center">Healthy</td>
-<td align="center">765</td>
-<td align="center">0.2184</td>
-<td align="center">0.9992</td>
-<td align="center">0.03613</td>
-<td align="center">0.1475</td>
-<td align="center">0.2893</td>
+<td align="right">BMO.TI</td>
+<td align="right">Healthy</td>
+<td align="right">765</td>
+<td align="right">0.2184</td>
+<td align="right">0.9992</td>
+<td align="right">0.03613</td>
+<td align="right">0.1475</td>
+<td align="right">0.2893</td>
 </tr>
 <tr class="odd">
-<td align="center">BMO.TI</td>
-<td align="center">II</td>
-<td align="center">78</td>
-<td align="center">-1.23</td>
-<td align="center">0.9312</td>
-<td align="center">0.1054</td>
-<td align="center">-1.44</td>
-<td align="center">-1.02</td>
+<td align="right">BMO.TI</td>
+<td align="right">I</td>
+<td align="right">51</td>
+<td align="right">-0.2698</td>
+<td align="right">0.9536</td>
+<td align="right">0.1335</td>
+<td align="right">-0.538</td>
+<td align="right">-0.001556</td>
 </tr>
 <tr class="even">
-<td align="center">BMO.TI</td>
-<td align="center">I</td>
-<td align="center">51</td>
-<td align="center">-0.2698</td>
-<td align="center">0.9536</td>
-<td align="center">0.1335</td>
-<td align="center">-0.538</td>
-<td align="center">-0.001556</td>
+<td align="right">BMO.TI</td>
+<td align="right">II</td>
+<td align="right">78</td>
+<td align="right">-1.23</td>
+<td align="right">0.9312</td>
+<td align="right">0.1054</td>
+<td align="right">-1.44</td>
+<td align="right">-1.02</td>
 </tr>
 <tr class="odd">
-<td align="center">BMO.TI</td>
-<td align="center">IV</td>
-<td align="center">41</td>
-<td align="center">-3.377</td>
-<td align="center">0.8779</td>
-<td align="center">0.1371</td>
-<td align="center">-3.654</td>
-<td align="center">-3.1</td>
+<td align="right">BMO.TI</td>
+<td align="right">III</td>
+<td align="right">56</td>
+<td align="right">-2.325</td>
+<td align="right">1.007</td>
+<td align="right">0.1346</td>
+<td align="right">-2.595</td>
+<td align="right">-2.055</td>
 </tr>
 <tr class="even">
-<td align="center">BMO.TI</td>
-<td align="center">III</td>
-<td align="center">56</td>
-<td align="center">-2.325</td>
-<td align="center">1.007</td>
-<td align="center">0.1346</td>
-<td align="center">-2.595</td>
-<td align="center">-2.055</td>
+<td align="right">BMO.TI</td>
+<td align="right">IV</td>
+<td align="right">41</td>
+<td align="right">-3.377</td>
+<td align="right">0.8779</td>
+<td align="right">0.1371</td>
+<td align="right">-3.654</td>
+<td align="right">-3.1</td>
 </tr>
 <tr class="odd">
-<td align="center">RNFL3.5.G</td>
-<td align="center">Healthy</td>
-<td align="center">765</td>
-<td align="center">0.3165</td>
-<td align="center">1.044</td>
-<td align="center">0.03776</td>
-<td align="center">0.2423</td>
-<td align="center">0.3906</td>
+<td align="right">RNFL3.5.G</td>
+<td align="right">Healthy</td>
+<td align="right">765</td>
+<td align="right">0.3165</td>
+<td align="right">1.044</td>
+<td align="right">0.03776</td>
+<td align="right">0.2423</td>
+<td align="right">0.3906</td>
 </tr>
 <tr class="even">
-<td align="center">RNFL3.5.G</td>
-<td align="center">II</td>
-<td align="center">78</td>
-<td align="center">-1.337</td>
-<td align="center">0.7206</td>
-<td align="center">0.08159</td>
-<td align="center">-1.5</td>
-<td align="center">-1.175</td>
+<td align="right">RNFL3.5.G</td>
+<td align="right">I</td>
+<td align="right">51</td>
+<td align="right">0.6</td>
+<td align="right">0.7404</td>
+<td align="right">0.1037</td>
+<td align="right">0.3918</td>
+<td align="right">0.8082</td>
 </tr>
 <tr class="odd">
-<td align="center">RNFL3.5.G</td>
-<td align="center">I</td>
-<td align="center">51</td>
-<td align="center">0.6</td>
-<td align="center">0.7404</td>
-<td align="center">0.1037</td>
-<td align="center">0.3918</td>
-<td align="center">0.8082</td>
+<td align="right">RNFL3.5.G</td>
+<td align="right">II</td>
+<td align="right">78</td>
+<td align="right">-1.337</td>
+<td align="right">0.7206</td>
+<td align="right">0.08159</td>
+<td align="right">-1.5</td>
+<td align="right">-1.175</td>
 </tr>
 <tr class="even">
-<td align="center">RNFL3.5.G</td>
-<td align="center">IV</td>
-<td align="center">41</td>
-<td align="center">-5.493</td>
-<td align="center">1.132</td>
-<td align="center">0.1768</td>
-<td align="center">-5.85</td>
-<td align="center">-5.136</td>
+<td align="right">RNFL3.5.G</td>
+<td align="right">III</td>
+<td align="right">56</td>
+<td align="right">-3.129</td>
+<td align="right">0.7729</td>
+<td align="right">0.1033</td>
+<td align="right">-3.336</td>
+<td align="right">-2.922</td>
 </tr>
 <tr class="odd">
-<td align="center">RNFL3.5.G</td>
-<td align="center">III</td>
-<td align="center">56</td>
-<td align="center">-3.129</td>
-<td align="center">0.7729</td>
-<td align="center">0.1033</td>
-<td align="center">-3.336</td>
-<td align="center">-2.922</td>
+<td align="right">RNFL3.5.G</td>
+<td align="right">IV</td>
+<td align="right">41</td>
+<td align="right">-5.493</td>
+<td align="right">1.132</td>
+<td align="right">0.1768</td>
+<td align="right">-5.85</td>
+<td align="right">-5.136</td>
 </tr>
 <tr class="even">
-<td align="center">RNFL3.5.TI</td>
-<td align="center">Healthy</td>
-<td align="center">765</td>
-<td align="center">0.07504</td>
-<td align="center">1.114</td>
-<td align="center">0.04029</td>
-<td align="center">-0.004048</td>
-<td align="center">0.1541</td>
+<td align="right">RNFL3.5.TI</td>
+<td align="right">Healthy</td>
+<td align="right">765</td>
+<td align="right">0.07504</td>
+<td align="right">1.114</td>
+<td align="right">0.04029</td>
+<td align="right">-0.004048</td>
+<td align="right">0.1541</td>
 </tr>
 <tr class="odd">
-<td align="center">RNFL3.5.TI</td>
-<td align="center">II</td>
-<td align="center">78</td>
-<td align="center">-1.018</td>
-<td align="center">1.04</td>
-<td align="center">0.1178</td>
-<td align="center">-1.252</td>
-<td align="center">-0.7831</td>
+<td align="right">RNFL3.5.TI</td>
+<td align="right">I</td>
+<td align="right">51</td>
+<td align="right">0.05274</td>
+<td align="right">0.8429</td>
+<td align="right">0.118</td>
+<td align="right">-0.1843</td>
+<td align="right">0.2898</td>
 </tr>
 <tr class="even">
-<td align="center">RNFL3.5.TI</td>
-<td align="center">I</td>
-<td align="center">51</td>
-<td align="center">0.05274</td>
-<td align="center">0.8429</td>
-<td align="center">0.118</td>
-<td align="center">-0.1843</td>
-<td align="center">0.2898</td>
+<td align="right">RNFL3.5.TI</td>
+<td align="right">II</td>
+<td align="right">78</td>
+<td align="right">-1.018</td>
+<td align="right">1.04</td>
+<td align="right">0.1178</td>
+<td align="right">-1.252</td>
+<td align="right">-0.7831</td>
 </tr>
 <tr class="odd">
-<td align="center">RNFL3.5.TI</td>
-<td align="center">IV</td>
-<td align="center">41</td>
-<td align="center">-5.305</td>
-<td align="center">1.117</td>
-<td align="center">0.1745</td>
-<td align="center">-5.658</td>
-<td align="center">-4.953</td>
+<td align="right">RNFL3.5.TI</td>
+<td align="right">III</td>
+<td align="right">56</td>
+<td align="right">-3.654</td>
+<td align="right">1.259</td>
+<td align="right">0.1682</td>
+<td align="right">-3.991</td>
+<td align="right">-3.317</td>
 </tr>
 <tr class="even">
-<td align="center">RNFL3.5.TI</td>
-<td align="center">III</td>
-<td align="center">56</td>
-<td align="center">-3.654</td>
-<td align="center">1.259</td>
-<td align="center">0.1682</td>
-<td align="center">-3.991</td>
-<td align="center">-3.317</td>
+<td align="right">RNFL3.5.TI</td>
+<td align="right">IV</td>
+<td align="right">41</td>
+<td align="right">-5.305</td>
+<td align="right">1.117</td>
+<td align="right">0.1745</td>
+<td align="right">-5.658</td>
+<td align="right">-4.953</td>
 </tr>
 </tbody>
 </table>
@@ -1988,7 +1947,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -1997,6 +1956,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')

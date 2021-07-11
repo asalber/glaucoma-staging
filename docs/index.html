@@ -10,17 +10,26 @@
 
 
 
-<meta name="date" content="2021-03-31" />
+<meta name="date" content="2021-07-11" />
 
 <title>Glaucoma staging study</title>
 
-<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
-<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -31,12 +40,12 @@
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 <script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
 <link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="site_libs/datatables-binding-0.17/datatables.js"></script>
+<script src="site_libs/datatables-binding-0.18/datatables.js"></script>
 <link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="site_libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
-<link href="site_libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="site_libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="site_libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -50,11 +59,6 @@
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -67,32 +71,6 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
 
 
 
@@ -103,10 +81,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -123,40 +97,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -184,7 +131,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -196,7 +143,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -207,10 +154,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -222,7 +182,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -348,7 +307,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -396,7 +355,7 @@ div.tocify {
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="http://aprendeconalf.es/">
-    <span class="fas fa-home fa-lg"></span>
+    <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -405,12 +364,12 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
 <h1 class="title toc-ignore">Glaucoma staging study</h1>
-<h4 class="date">2021-03-31</h4>
+<h4 class="date">2021-07-11</h4>
 
 </div>
 
@@ -441,8 +400,8 @@ div.tocify {
 </div>
 <div id="variables" class="section level1">
 <h1>Variables</h1>
-<div id="htmlwidget-557df47be3ea9b6925ef" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-557df47be3ea9b6925ef">{"x":{"filter":"none","data":[["Patient.Id","Glaucoma","Gender","Age","Eye","FoBMO.Angle","Displacement","BMO.Area","BMO.G","BMO.NS","BMO.N","BMO.NI","BMO.TI","BMO.T","BMO.TS","Rim3.5.G","Rim3.5.NS","Rim3.5.N","Rim3.5.NI","Rim3.5.TI","Rim3.5.T","Rim3.5.TS","Rim4.1.G","Rim4.1.NS","Rim4.1.N","Rim4.1.NI","Rim4.1.TI","Rim4.1.T","Rim4.1.TS","Rim4.7.G","Rim4.7.NS","Rim4.7.N","Rim4.7.NI","Rim4.7.TI","Rim4.7.T","Rim4.7.TS"],["Patient identifier","Whether the patient has glaucoma or not ","Gender","Age","Eye","Angle from the center of the papilla to the macula","Distance from papilla center to macula","BMO area","Thickness of BMO global","Thickness of BMO upper nasal","Thickness of BMO nasal","Thickness of BMO lower nasal","Thickness of BMO lower temporal","Thickness of BMO temporal","Thickness of BMO upper temporal","Thickness of rim 3.5 global","Thickness of rim 3.5 upper nasal","Thickness of rim 3.5 nasal","Thickness of rim 3.5 lower nasal","Thickness of rim 3.5 lower temporal","Thickness of rim 3.5 temporal","Thickness of rim 3.5 upper temporal","Thickness of rim 4.1 global","Thickness of rim 4.1 upper nasal","Thickness of rim 4.1 nasal","Thickness of rim 4.1 lower nasal","Thickness of rim 4.1 lower temporal","Thickness of rim 4.1 temporal","Thickness of rim 4.1 upper temporal","Thickness of rim 4.7 global","Thickness of rim 4.7 upper nasal","Thickness of rim 4.7 nasal","Thickness of rim 4.7 lower nasal","Thickness of rim 4.7 lower temporal","Thickness of rim 4.7 temporal","Thickness of rim 4.7 upper temporal"],["String","Factor","Factor","Num","Factor","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num"],["","Factor(Y;N)","Factor (F;M)","Real","Factor (L;M)","Real (-30-+30)","Real (µm)","Real (mm2)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Variable<\/th>\n      <th>Description<\/th>\n      <th>Type<\/th>\n      <th>Units<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"dom":"ltip","language":{"url":"http://cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"},"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-786d9d3fe28ddcdfc642" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-786d9d3fe28ddcdfc642">{"x":{"filter":"none","data":[["Patient.Id","Glaucoma","Gender","Age","Eye","FoBMO.Angle","Displacement","BMO.Area","BMO.G","BMO.NS","BMO.N","BMO.NI","BMO.TI","BMO.T","BMO.TS","Rim3.5.G","Rim3.5.NS","Rim3.5.N","Rim3.5.NI","Rim3.5.TI","Rim3.5.T","Rim3.5.TS","Rim4.1.G","Rim4.1.NS","Rim4.1.N","Rim4.1.NI","Rim4.1.TI","Rim4.1.T","Rim4.1.TS","Rim4.7.G","Rim4.7.NS","Rim4.7.N","Rim4.7.NI","Rim4.7.TI","Rim4.7.T","Rim4.7.TS"],["Patient identifier","Whether the patient has glaucoma or not ","Gender","Age","Eye","Angle from the center of the papilla to the macula","Distance from papilla center to macula","BMO area","Thickness of BMO global","Thickness of BMO upper nasal","Thickness of BMO nasal","Thickness of BMO lower nasal","Thickness of BMO lower temporal","Thickness of BMO temporal","Thickness of BMO upper temporal","Thickness of rim 3.5 global","Thickness of rim 3.5 upper nasal","Thickness of rim 3.5 nasal","Thickness of rim 3.5 lower nasal","Thickness of rim 3.5 lower temporal","Thickness of rim 3.5 temporal","Thickness of rim 3.5 upper temporal","Thickness of rim 4.1 global","Thickness of rim 4.1 upper nasal","Thickness of rim 4.1 nasal","Thickness of rim 4.1 lower nasal","Thickness of rim 4.1 lower temporal","Thickness of rim 4.1 temporal","Thickness of rim 4.1 upper temporal","Thickness of rim 4.7 global","Thickness of rim 4.7 upper nasal","Thickness of rim 4.7 nasal","Thickness of rim 4.7 lower nasal","Thickness of rim 4.7 lower temporal","Thickness of rim 4.7 temporal","Thickness of rim 4.7 upper temporal"],["String","Factor","Factor","Num","Factor","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num","Num"],["","Factor(Y;N)","Factor (F;M)","Real","Factor (L;M)","Real (-30-+30)","Real (µm)","Real (mm2)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)","Integer (0-100)"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Variable<\/th>\n      <th>Description<\/th>\n      <th>Type<\/th>\n      <th>Units<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"dom":"ltip","language":{"url":"http://cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"},"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="data-preprocessing" class="section level1">
 <h1>Data preprocessing</h1>
@@ -499,7 +458,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -508,6 +467,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
