@@ -1,5 +1,5 @@
 ---
-title: "Estudio sobre el Glaucoma"
+title: "Descriptive statistics"
 date: "`r Sys.Date()`"
 ---
 
@@ -19,7 +19,7 @@ library(skimr)
 ```
 
 
-# Tamaño muestral
+# Sample size
 
 ```{r sample size}
 data %>%

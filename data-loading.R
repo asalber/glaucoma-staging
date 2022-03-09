@@ -6,7 +6,7 @@
 .packages <- c("readxl", "tidyverse", "ggpubr")
 .installed <- .packages %in% installed.packages()
 if (length(.packages[!.installed])>0) install.packages(.packages[!.installed])
-lapply(.packages, require, character.only=T)
+lapply(.packages, library, character.only=T)
 
 # Data loading (see file data-preprocessing.R)
 data <- read.csv(file="data/data-preprocessed.csv", header=T, sep=",")
